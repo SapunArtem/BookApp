@@ -1,0 +1,68 @@
+
+### Android ###
+# Файлы сборки
+*.apk
+*.aab
+*.aar
+*.jar
+*.class
+*.dex
+/bin/
+/gen/
+/build/
+/outputs/
+/reports/
+/proguard/
+/obj/
+
+# Файлы Android Studio
+*.iml
+.idea/
+.idea_modules/
+.gradle/
+local.properties
+/captures
+.navigation/
+*.swp
+*.swo
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Кэш и логи
+*.log
+*.pyc
+*.lock
+*.tmp
+*.bak
+*.orig
+*.hprof
+
+# Временные файлы
+*.~
+*~
+*.old
+
+# Файлы NDK/C++
+.externalNativeBuild/
+.cxx/
+
+### Конфиденциальные данные ###
+# Ключи подписи
+*.keystore
+*.jks
+
+# Файлы сервисов
+google-services.json
+google-services.xml
+fabric.properties
+
+### Kotlin ###
+# Файлы Kotlin
+*.kotlin_module
+
+### Дополнительно ###
+# Файлы линтера
+/lint-report.html
+/lint-results.html
