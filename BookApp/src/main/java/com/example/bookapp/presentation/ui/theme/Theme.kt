@@ -1,4 +1,4 @@
-package com.example.bookapp.ui.theme
+package com.example.bookapp.presentation.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

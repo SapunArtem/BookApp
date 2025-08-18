@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BookApp</string>
+    <string name="home">Главная</string>
+    <string name="favorite">Избранные</string>
+    <string name="profile">Профиль</string>
+
+
+    <string name="description">Описание</string>
+    <string name="search">Поиск</string>
+
+
+    <string name="settings">Настройки</string>
+    <string name="app_theme">Тема приложения</string>
+
+    <string name="published">Дата публикации</string>
+    <string name="publisher">Издатель</string>
+    <string name="pages">Количество страниц</string>
+    <string name="read_preview">Преаью</string>
+
+    <!-- ifNull -->
+    <string name="null_description">Нет описания для этого фильма</string>
+    <string name="movie_etails_not_available">Поробноти о фильме не доступны</string>
+    <string name="there_are_no_favorites">Избранных нет</string>
+    <string name="movies_not_found">Фильмы не найдены</string>
+
+    <!-- Error -->
+    <string name="error">Ошибка</string>
+    <string name="repeat">Повторить</string>
+</resources>

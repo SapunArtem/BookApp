@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -8,7 +10,7 @@ plugins {
 
 android {
     namespace = "com.example.bookapp"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.bookapp"
@@ -18,6 +20,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BOOKS_API_KEY", "\"${getLocalProperty("BOOKS_API_KEY")}\"")
+
     }
 
     buildTypes {
@@ -38,7 +43,17 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
+}
+fun getLocalProperty(key: String): String {
+    val properties = Properties()
+    val localFile = project.rootProject.file("local.properties")
+    if (localFile.exists()) {
+        properties.load(localFile.inputStream())
+        return properties.getProperty(key) ?: throw GradleException("Файл local.properties не найден!")
+    }
+    return ""
 }
 
 dependencies {
