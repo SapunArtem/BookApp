@@ -101,8 +101,8 @@ fun HomeScreen(
                 else -> {
                     BooksList(
                         books = books,
-                        onBookClick = { moviesId ->
-                            navController.navigate(Screens.Details.createRoute(moviesId))
+                        onBookClick = { bookId ->
+                            navController.navigate(Screens.Details.createRoute(bookId))
                         },
                         isLoading = state.isLoading,
                     )
