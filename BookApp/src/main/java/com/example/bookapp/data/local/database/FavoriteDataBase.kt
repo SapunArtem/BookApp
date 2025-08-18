@@ -20,15 +20,18 @@ abstract class FavoriteDataBase : RoomDatabase() {
     abstract fun favoriteDao(): FavoriteDao
 
     companion object {
-        @Volatile private var instance: FavoriteDataBase? = null
+        @Volatile private var INSTANCE: FavoriteDataBase? = null
 
         fun getInstance(context: Context): FavoriteDataBase {
-            return instance ?: synchronized(this) {
-                instance ?: Room.databaseBuilder(
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
                     context.applicationContext,
                     FavoriteDataBase::class.java,
-                    "favorites.db"
-                ).build().also { instance = it }
+                    "favorite_db"
+                )
+                    .build()
+                INSTANCE = instance
+                instance
             }
         }
     }

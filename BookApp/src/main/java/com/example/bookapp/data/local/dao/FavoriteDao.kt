@@ -6,11 +6,12 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.bookapp.data.local.entity.FavoriteEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteDao {
-    @Query("SELECT * FROM favorites ORDER BY addedAt DESC")
-    suspend fun getAll(): List<FavoriteEntity>
+    @Query("SELECT * FROM favorites")
+    fun getAll(): Flow<List<FavoriteEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(favorite: FavoriteEntity)
@@ -18,12 +19,6 @@ interface FavoriteDao {
     @Delete
     suspend fun delete(favorite: FavoriteEntity)
 
-    @Query("DELETE FROM favorites WHERE id = :bookId")
-    suspend fun deleteById(bookId: String)
-
-    @Query("SELECT EXISTS(SELECT 1 FROM favorites WHERE id = :bookId LIMIT 1)")
-    suspend fun exists(bookId: String): Boolean
-
-    @Query("SELECT * FROM favorites WHERE id = :bookId LIMIT 1")
-    suspend fun getById(bookId: String): FavoriteEntity?
+    @Query("SELECT EXISTS(SELECT * FROM favorites WHERE id = :bookId)")
+    fun isFavorite(bookId: String): Flow<Boolean>
 }
