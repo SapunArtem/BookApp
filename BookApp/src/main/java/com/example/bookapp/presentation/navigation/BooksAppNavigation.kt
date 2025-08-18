@@ -31,7 +31,9 @@ fun BooksAppNavigation(
             ProfileScreen()
         }
         composable(Screens.Favorite.route){
-            FavoriteScreen()
+            FavoriteScreen(
+                navController = navController
+            )
         }
         composable(
             Screens.Details.route,
