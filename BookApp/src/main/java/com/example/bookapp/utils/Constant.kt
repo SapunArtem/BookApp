@@ -1,4 +1,4 @@
-package utils
+package com.example.bookapp.utils
 
 import com.example.bookapp.BuildConfig
 
