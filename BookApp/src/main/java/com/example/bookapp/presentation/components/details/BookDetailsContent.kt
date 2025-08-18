@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -14,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,19 +23,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.bookapp.R
 import com.example.bookapp.domain.models.Book
-import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun BookDetailsContent(
     book: Book,
+    onPreview: () -> Unit,
     onFavoriteClick: () -> Unit,
     isFavorite: Boolean,
     modifier: Modifier = Modifier
@@ -47,8 +46,6 @@ fun BookDetailsContent(
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .height(250.dp)
         ) {
             GlideImage(
                 model = book.thumbnail,
@@ -77,7 +74,7 @@ fun BookDetailsContent(
                     Icon(
                         imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites",
-                        tint = if (isFavorite) Color.Red else MaterialTheme.colorScheme.onSurface
+                        tint = if (isFavorite) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
@@ -111,8 +108,12 @@ fun BookDetailsContent(
 
         book.previewLink?.let { link ->
             Button(
-                onClick = { },
-                modifier = Modifier.padding(top = 8.dp)
+                onClick = { onPreview() },
+                modifier = Modifier.padding(top = 8.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary,
+                    contentColor = MaterialTheme.colorScheme.secondary
+                )
             ) {
                 Text(text = stringResource(R.string.read_preview))
             }

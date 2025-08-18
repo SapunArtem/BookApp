@@ -14,3 +14,12 @@ val Orange = Color(0xFFFB9722)
 val GrayUnselected = Color(0x80FFFFFF)
 val White = Color(0xFFFFFFFF)
 val Black = Color(0xFF1F1F1F)
+
+val DarkRed = Color(0xFF6D0329)
+val MyPink = Color(0xFFF5A1D3)
+val AlmostWhite = Color(0xFFF5F5F5)
+
+
+val LightRed = Color(0xFF007BB1)
+val MyPinkDark = Color(0xFF56D6FF)
+val AlmostBack = Color(0xFF262525)

@@ -11,41 +11,45 @@ import com.example.bookapp.presentation.screens.DetailsScreen
 import com.example.bookapp.presentation.screens.FavoriteScreen
 import com.example.bookapp.presentation.screens.HomeScreen
 import com.example.bookapp.presentation.screens.ProfileScreen
+import com.example.bookapp.presentation.screens.SettingsScreen
 
 @Composable
 fun BooksAppNavigation(
     navController: NavHostController,
     modifier: Modifier
-){
+) {
     NavHost(
         navController = navController,
         startDestination = Screens.Home.route,
         modifier = modifier
     ) {
-        composable(Screens.Home.route){
+        composable(Screens.Home.route) {
             HomeScreen(
                 navController = navController
             )
         }
-        composable(Screens.Profile.route){
+        composable(Screens.Profile.route) {
             ProfileScreen()
         }
-        composable(Screens.Favorite.route){
+        composable(Screens.Favorite.route) {
             FavoriteScreen(
                 navController = navController
             )
         }
+        composable(Screens.Settings.route) {
+            SettingsScreen()
+        }
         composable(
             Screens.Details.route,
             arguments = listOf(
-                navArgument("bookId") {type = NavType.StringType}
+                navArgument("bookId") { type = NavType.StringType }
             )
-            ){backStackEntry ->
-                val bookId = backStackEntry.arguments?.getString("bookId") ?: return@composable
-                DetailsScreen(
-                    bookId = bookId
-                )
+        ) { backStackEntry ->
+            val bookId = backStackEntry.arguments?.getString("bookId") ?: return@composable
+            DetailsScreen(
+                bookId = bookId
+            )
 
-            }
+        }
     }
 }

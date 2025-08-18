@@ -16,6 +16,14 @@
     <string name="pages">Pages</string>
     <string name="read_preview">Read Preview</string>
 
+    <string name="edit_profile">Edit Profile</string>
+
+    <string name="email">Email</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="name">Name</string>
+
+
 
     <!-- ifNull -->
     <string name="null_description">No description for this title</string>
@@ -26,4 +34,11 @@
     <!-- Error -->
     <string name="error">Error</string>
     <string name="repeat">Repeat</string>
+
+    <string name="light_theme">Светлая тема</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="app_language">Язык приложения</string>
+    <string name="english">Английский</string>
+    <string name="russian">Русский</string>
+    <string name="selected">Выбрано</string>
 </resources>

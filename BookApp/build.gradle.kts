@@ -63,8 +63,6 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
     testImplementation(libs.mockk)
-
-    // Для имитации Context в тесте DetailsViewModel.loadTrailer
     testImplementation(libs.androidx.core)
 
     //DataStore

@@ -1,7 +1,5 @@
 package com.example.bookapp.presentation.viewModel
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookapp.domain.models.Book
@@ -11,12 +9,10 @@ import com.example.bookapp.domain.useCases.Favorite.ToggleFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,7 +21,7 @@ class FavoriteViewModel @Inject constructor(
     private val getFavoriteUseCase: GetFavoriteUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     private val removeFavoriteUseCase: RemoveFavoriteUseCase
-): ViewModel() {
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<FavoriteUiState>(FavoriteUiState.Loading)
     val uiState: StateFlow<FavoriteUiState> = _uiState
@@ -71,6 +67,7 @@ class FavoriteViewModel @Inject constructor(
             .map { favorites -> favorites.any { it.id == bookId } }
     }
 }
+
 sealed class FavoriteUiState {
     object Loading : FavoriteUiState()
     object Empty : FavoriteUiState()

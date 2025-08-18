@@ -11,7 +11,7 @@ import javax.inject.Inject
 class FavoriteRepositoryImpl @Inject constructor(
     private val dao: FavoriteDao,
     private val mapper: FavoriteMapper
-) : FavoriteRepository{
+) : FavoriteRepository {
 
     override fun getAllFavorites(): Flow<List<Book>> {
         return dao.getAll().map { list ->

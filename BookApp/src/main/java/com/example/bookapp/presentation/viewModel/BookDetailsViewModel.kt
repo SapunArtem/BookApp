@@ -1,12 +1,11 @@
 package com.example.bookapp.presentation.viewModel
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
+import android.content.Context
+import android.content.Intent
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookapp.domain.models.Book
-import com.example.bookapp.domain.useCases.Favorite.RemoveFavoriteUseCase
-import com.example.bookapp.domain.useCases.Favorite.ToggleFavoriteUseCase
 import com.example.bookapp.domain.useCases.Home.GetBooksDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BookDetailsViewModel @Inject constructor(
     private val getBooksDetailsUseCase: GetBooksDetailsUseCase,
-): ViewModel() {
+) : ViewModel() {
     private val _bookDetails = MutableStateFlow<Book?>(null)
     val bookDetails: StateFlow<Book?> = _bookDetails
 
@@ -38,7 +37,7 @@ class BookDetailsViewModel @Inject constructor(
                     _bookDetails.value = it
                     _error.value = null
                 }
-                .onFailure {e->
+                .onFailure { e ->
                     _error.value = e.message ?: "Faild to load book details"
                     _bookDetails.value = null
                 }
@@ -46,5 +45,10 @@ class BookDetailsViewModel @Inject constructor(
         }
 
 
+    }
+
+    fun openInBrowser(context: Context, uri: String) {
+        val intent = Intent(Intent.ACTION_VIEW, uri.toUri())
+        context.startActivity(intent)
     }
 }

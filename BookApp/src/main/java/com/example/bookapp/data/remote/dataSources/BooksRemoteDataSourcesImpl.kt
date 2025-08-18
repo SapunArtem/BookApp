@@ -6,7 +6,7 @@ import com.example.bookapp.data.remote.models.BooksResponseDto
 import javax.inject.Inject
 
 class BooksRemoteDataSourcesImpl @Inject constructor(
-    private val api : BooksServiceApi
+    private val api: BooksServiceApi
 ) : BooksRemoteDataSources {
     override suspend fun getBooks(query: String): BooksResponseDto {
         return api.getBooks(query)

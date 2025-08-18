@@ -2,10 +2,9 @@ package com.example.bookapp.di
 
 import android.content.Context
 import com.example.bookapp.data.local.dao.FavoriteDao
-import com.example.bookapp.data.local.database.FavoriteDataBase
-import com.example.bookapp.data.local.repository.FavoriteRepositoryImpl
+import com.example.bookapp.data.local.dao.ProfileDao
+import com.example.bookapp.data.local.database.AppDataBase
 import com.example.bookapp.data.mapper.FavoriteMapper
-import com.example.bookapp.domain.repository.FavoriteRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,27 +14,25 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object FavoriteModule {
+object DataBaseModule {
     @Provides
     @Singleton
     fun provideDatabase(
         @ApplicationContext context: Context
-    ): FavoriteDataBase {
-        return FavoriteDataBase.getInstance(context)
+    ): AppDataBase {
+        return AppDataBase.getInstance(context)
     }
 
     @Provides
-    fun provideFavoriteDao(database: FavoriteDataBase): FavoriteDao {
+    fun provideFavoriteDao(database: AppDataBase): FavoriteDao {
         return database.favoriteDao()
     }
 
     @Provides
-    fun provideFavoriteRepository(
-        dao: FavoriteDao,
-        mapper: FavoriteMapper
-    ): FavoriteRepository {
-        return FavoriteRepositoryImpl(dao, mapper)
+    fun provideProfileDao(database: AppDataBase): ProfileDao {
+        return database.profileDao()
     }
+
 
     @Provides
     fun provideFavoriteMapper(): FavoriteMapper {

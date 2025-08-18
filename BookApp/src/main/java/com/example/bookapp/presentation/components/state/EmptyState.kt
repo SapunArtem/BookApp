@@ -1,4 +1,4 @@
-package com.example.bookapp.presentation.components
+package com.example.bookapp.presentation.components.state
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,7 +7,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.example.bookapp.presentation.ui.theme.Orange
 
 @Composable
 fun EmptyState(text: String) {
@@ -17,7 +16,7 @@ fun EmptyState(text: String) {
     ) {
         Text(
             text = text,
-            color = Orange,
+            color = MaterialTheme.colorScheme.tertiary,
             style = MaterialTheme.typography.titleMedium
         )
     }

@@ -1,4 +1,4 @@
-package com.example.bookapp.presentation.components
+package com.example.bookapp.presentation.components.state
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,8 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.bookapp.R
-import com.example.bookapp.presentation.ui.theme.Orange
-import com.example.bookapp.presentation.ui.theme.White
 
 @Composable
 fun ErrorMessage(
@@ -30,15 +28,15 @@ fun ErrorMessage(
     ) {
         Text(
             text = "${stringResource(R.string.error)}: $error",
-            color = Orange,
+            color = MaterialTheme.colorScheme.tertiary,
             style = MaterialTheme.typography.bodyLarge
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = onRetry,
             colors = ButtonDefaults.buttonColors(
-                containerColor = Orange,
-                contentColor = White
+                containerColor = MaterialTheme.colorScheme.tertiary,
+                contentColor = MaterialTheme.colorScheme.secondary
             )
         ) {
             Text(text = stringResource(R.string.repeat))

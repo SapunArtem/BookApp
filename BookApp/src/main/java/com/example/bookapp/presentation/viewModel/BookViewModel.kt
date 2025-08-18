@@ -13,17 +13,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BookViewModel  @Inject constructor(
+class BookViewModel @Inject constructor(
     private val getBooksUseCase: GetBooksUseCase
-): ViewModel(){
+) : ViewModel() {
     private val _state = mutableStateOf(BooksState())
     val state: State<BooksState> = _state
 
     private val _books = MutableStateFlow<List<Book>>(emptyList())
-    val books : StateFlow<List<Book>> = _books
+    val books: StateFlow<List<Book>> = _books
 
     private var _lastQuery = MutableStateFlow("")
     val lastQuery: StateFlow<String> = _lastQuery
+
     init {
         searchBooks("а")
     }
