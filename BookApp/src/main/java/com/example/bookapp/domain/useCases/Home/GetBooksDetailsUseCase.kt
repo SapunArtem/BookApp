@@ -1,4 +1,4 @@
-package com.example.bookapp.domain.useCases
+package com.example.bookapp.domain.useCases.Home
 
 import com.example.bookapp.domain.models.Book
 import com.example.bookapp.domain.repository.BookRepository

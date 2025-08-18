@@ -1,8 +1,8 @@
 package com.example.bookapp.di
 
 import com.example.bookapp.domain.repository.BookRepository
-import com.example.bookapp.domain.useCases.GetBooksDetailsUseCase
-import com.example.bookapp.domain.useCases.GetBooksUseCase
+import com.example.bookapp.domain.useCases.Home.GetBooksDetailsUseCase
+import com.example.bookapp.domain.useCases.Home.GetBooksUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

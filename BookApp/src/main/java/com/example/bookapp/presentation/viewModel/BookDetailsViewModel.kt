@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookapp.domain.models.Book
-import com.example.bookapp.domain.useCases.GetBooksDetailsUseCase
+import com.example.bookapp.domain.useCases.Home.GetBooksDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
