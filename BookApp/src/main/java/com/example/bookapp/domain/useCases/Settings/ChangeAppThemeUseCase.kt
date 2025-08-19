@@ -6,11 +6,7 @@ import javax.inject.Inject
 class ChangeAppThemeUseCase @Inject constructor(
     private val themeRepository: ThemeRepository
 ) {
-    /**
-     * Устанавливает тему приложения.
-     *
-     * @param isDark true — тёмная тема, false — светлая тема.
-     */
+
     operator fun invoke(isDark: Boolean) {
         themeRepository.setTheme(isDark)
     }
