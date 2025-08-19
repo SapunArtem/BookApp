@@ -11,8 +11,8 @@ interface BooksServiceApi {
 
     @GET("volumes")
     suspend fun getBooks(
-        @Query("q") query : String,
-        @Query("key") apiKey : String = Constant.API_KEY
+        @Query("q") query: String,
+        @Query("key") apiKey: String = Constant.API_KEY
     ): BooksResponseDto
 
     @GET("volumes/{volumeId}")

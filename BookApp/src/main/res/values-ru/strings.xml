@@ -16,7 +16,13 @@
     <string name="published">Дата публикации</string>
     <string name="publisher">Издатель</string>
     <string name="pages">Количество страниц</string>
-    <string name="read_preview">Преаью</string>
+    <string name="read_preview">Превью</string>
+
+    <string name="edit_profile">Редактировать профиль</string>
+    <string name="email">Почта</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Вернуться</string>
+    <string name="name">Имя</string>
 
     <!-- ifNull -->
     <string name="null_description">Нет описания для этого фильма</string>
@@ -27,4 +33,11 @@
     <!-- Error -->
     <string name="error">Ошибка</string>
     <string name="repeat">Повторить</string>
+
+    <string name="light_theme">Светлая тема</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="app_language">Язык приложения</string>
+    <string name="english">Английский</string>
+    <string name="russian">Русский</string>
+    <string name="selected">Выбрано</string>
 </resources>

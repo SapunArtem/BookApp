@@ -6,31 +6,39 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.navigation.NavController
-import com.example.bookapp.presentation.components.ErrorMessage
+import com.example.bookapp.R
+import com.example.bookapp.presentation.components.state.EmptyState
+import com.example.bookapp.presentation.components.state.ErrorMessage
 import com.example.bookapp.presentation.components.details.BookDetailsContent
 import com.example.bookapp.presentation.ui.theme.Orange
 import com.example.bookapp.presentation.viewModel.BookDetailsViewModel
+import com.example.bookapp.presentation.viewModel.FavoriteViewModel
 
 @Composable
 fun DetailsScreen(
-    bookId : String,
-    viewModel: BookDetailsViewModel = hiltViewModel()
-){
-    val state by viewModel.state
+    bookId: String,
+    viewModel: BookDetailsViewModel = hiltViewModel(),
+    favoriteViewModel: FavoriteViewModel = hiltViewModel()
+) {
+    val bookDetails by viewModel.bookDetails.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    val error by viewModel.error.collectAsState()
+    val context = LocalContext.current
 
     LaunchedEffect(bookId) {
-            viewModel.loadDetails(bookId)
+        viewModel.loadDetails(bookId)
     }
 
     when {
-        state.isLoading -> {
+        isLoading -> {
             Box(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -40,19 +48,39 @@ fun DetailsScreen(
             }
         }
 
-        state.error != null -> {
-                ErrorMessage(state.error!!) {
-                        viewModel.loadDetails(bookId)
+        error != null -> {
+            ErrorMessage(error!!) {
+                viewModel.loadDetails(bookId)
 
-                }
+            }
 
         }
 
-        state.book != null -> {
-            BookDetailsContent(
-                book = state.book!!,
-                modifier = Modifier.padding(16.dp)
-            )
+        bookDetails == null -> EmptyState(text = stringResource(R.string.movie_etails_not_available))
+
+        else -> {
+            bookDetails?.let { item ->
+                val isFavorite by favoriteViewModel
+                    .isFavoriteFlow(item.id)
+                    .collectAsState(false)
+                BookDetailsContent(
+                    book = item,
+                    onFavoriteClick = {
+                        favoriteViewModel.toggleFavorite(
+                            book = item,
+                            isFavorite = isFavorite
+                        )
+                    },
+                    isFavorite = isFavorite,
+                    modifier = Modifier.padding(16.dp),
+                    onPreview = {
+                        viewModel.openInBrowser(
+                            context,
+                            item.previewLink ?: "No preview"
+                        )
+                    }
+                )
+            }
         }
     }
 }

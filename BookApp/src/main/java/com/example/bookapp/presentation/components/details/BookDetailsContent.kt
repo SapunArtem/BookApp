@@ -4,15 +4,19 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +34,9 @@ import com.example.bookapp.domain.models.Book
 @Composable
 fun BookDetailsContent(
     book: Book,
+    onPreview: () -> Unit,
+    onFavoriteClick: () -> Unit,
+    isFavorite: Boolean,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -39,8 +46,6 @@ fun BookDetailsContent(
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .height(250.dp)
         ) {
             GlideImage(
                 model = book.thumbnail,
@@ -62,20 +67,31 @@ fun BookDetailsContent(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
                 )
+                IconButton(
+                    onClick = onFavoriteClick,
+                    modifier = Modifier.padding(top = 8.dp)
+                ) {
+                    Icon(
+                        imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites",
+                        tint = if (isFavorite) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.onSurface
+                    )
+                }
             }
         }
+
 
         HorizontalDivider()
 
 
-            Text(
-                text = stringResource(R.string.description),
-                style = MaterialTheme.typography.titleMedium
-            )
-            Text(
-                text = book.description ?: stringResource(R.string.null_description),
-                style = MaterialTheme.typography.bodyMedium
-            )
+        Text(
+            text = stringResource(R.string.description),
+            style = MaterialTheme.typography.titleMedium
+        )
+        Text(
+            text = book.description ?: stringResource(R.string.null_description),
+            style = MaterialTheme.typography.bodyMedium
+        )
 
 
         HorizontalDivider()
@@ -92,11 +108,16 @@ fun BookDetailsContent(
 
         book.previewLink?.let { link ->
             Button(
-                onClick = {  },
-                modifier = Modifier.padding(top = 8.dp)
+                onClick = { onPreview() },
+                modifier = Modifier.padding(top = 8.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary,
+                    contentColor = MaterialTheme.colorScheme.secondary
+                )
             ) {
                 Text(text = stringResource(R.string.read_preview))
             }
         }
     }
 }
+

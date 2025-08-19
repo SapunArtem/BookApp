@@ -3,7 +3,7 @@ package com.example.bookapp.domain.models
 data class Book(
     val id: String,
     val title: String,
-    val authors: List<String> ,
+    val authors: List<String>,
     val publisher: String? = null,
     val publishedDate: String? = null,
     val description: String? = null,

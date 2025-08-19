@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class BooksRepositoryImpl @Inject constructor(
     private val remoteDataSources: BooksRemoteDataSources
-): BookRepository {
+) : BookRepository {
 
     override suspend fun getBooks(query: String): Result<List<Book>> {
         return withContext(Dispatchers.IO) {

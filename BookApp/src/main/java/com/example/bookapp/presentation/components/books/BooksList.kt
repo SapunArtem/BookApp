@@ -13,15 +13,15 @@ import com.example.bookapp.presentation.ui.theme.Orange
 
 @Composable
 fun BooksList(
-    books : List<Book>,
+    books: List<Book>,
     onBookClick: (String) -> Unit,
     isLoading: Boolean
-){
+) {
     LazyColumn {
-        items(books){book ->
+        items(books) { book ->
             BookCard(
                 book = book,
-                onClick = {onBookClick(book.id)}
+                onClick = { onBookClick(book.id) }
             )
         }
         if (isLoading) {

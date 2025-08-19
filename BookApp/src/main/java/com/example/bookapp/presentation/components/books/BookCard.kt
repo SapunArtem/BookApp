@@ -26,9 +26,9 @@ import com.example.bookapp.domain.models.Book
 fun BookCard(book: Book, onClick: () -> Unit) {
     Card(
         modifier = Modifier
-        .clickable(onClick = { onClick() })
-        .padding(8.dp)
-        .testTag("Book"),
+            .clickable(onClick = { onClick() })
+            .padding(8.dp)
+            .testTag("Book"),
         elevation = CardDefaults.cardElevation(4.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
@@ -45,19 +45,22 @@ fun BookCard(book: Book, onClick: () -> Unit) {
                 contentScale = ContentScale.Fit
             )
 
-            Column (
+            Column(
                 modifier = Modifier
                     .padding(8.dp)
                     .weight(1f)
-            ){
+            ) {
                 Text(
                     text = book.title,
                     fontWeight = Bold,
-                    maxLines = 2
-                    ,
+                    maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
+                    color = Color.Black
                 )
-                Text(book.authors.joinToString())
+                Text(
+                    book.authors.joinToString(),
+                    color = Color.Black
+                )
             }
 
         }

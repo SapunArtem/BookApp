@@ -8,19 +8,16 @@ import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import com.example.bookapp.presentation.ui.theme.GrayUnselected
-import com.example.bookapp.presentation.ui.theme.Orange
 
 @Composable
 fun BottomBar(
     navController: NavController,
-    currentRoute : String?
-){
+    currentRoute: String?
+) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primary
     ) {
@@ -45,17 +42,17 @@ fun BottomBar(
                 },
                 label = {
                     Text(
-                        text = stringResource(id = bottomItem.title)
+                        text = stringResource(bottomItem.title)
                     )
                 },
                 colors = NavigationBarItemColors(
-                    selectedTextColor = Orange,
-                    selectedIconColor = Orange,
-                    selectedIndicatorColor = Color.Transparent,
-                    unselectedTextColor = GrayUnselected,
-                    unselectedIconColor = GrayUnselected,
-                    disabledIconColor = GrayUnselected,
-                    disabledTextColor = GrayUnselected
+                    selectedTextColor = MaterialTheme.colorScheme.secondary,
+                    selectedIconColor = MaterialTheme.colorScheme.secondary,
+                    selectedIndicatorColor = MaterialTheme.colorScheme.tertiary,
+                    unselectedTextColor = MaterialTheme.colorScheme.secondary,
+                    unselectedIconColor = MaterialTheme.colorScheme.secondary,
+                    disabledIconColor = MaterialTheme.colorScheme.tertiary,
+                    disabledTextColor = MaterialTheme.colorScheme.tertiary
                 )
             )
         }

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
@@ -24,8 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.bookapp.R
-import com.example.bookapp.presentation.components.EmptyState
-import com.example.bookapp.presentation.components.ErrorMessage
+import com.example.bookapp.presentation.components.state.EmptyState
+import com.example.bookapp.presentation.components.state.ErrorMessage
 import com.example.bookapp.presentation.components.books.BooksList
 import com.example.bookapp.presentation.components.searchBar.SearchMovieBar
 import com.example.bookapp.presentation.navigation.Screens
@@ -33,12 +32,7 @@ import com.example.bookapp.presentation.ui.theme.Orange
 import com.example.bookapp.presentation.viewModel.BookViewModel
 import kotlinx.coroutines.delay
 
-/**
- * Главный экран приложения со списком фильмов и поиском.
- *
- * @param navController Контроллер навигации
- * @param viewModel ViewModel для работы с фильмами
- */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -101,8 +95,8 @@ fun HomeScreen(
                 else -> {
                     BooksList(
                         books = books,
-                        onBookClick = { moviesId ->
-                            navController.navigate(Screens.Details.createRoute(moviesId))
+                        onBookClick = { bookId ->
+                            navController.navigate(Screens.Details.createRoute(bookId))
                         },
                         isLoading = state.isLoading,
                     )
