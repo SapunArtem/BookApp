@@ -17,6 +17,7 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
     private val updateProfileUseCase: UpdateProfileUseCase
+
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ProfileState())
