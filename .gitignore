@@ -19,8 +19,7 @@
 *.iml
 .idea/
 .idea_modules/
-.gradle/
-local.properties
+.gradle/local.properties
 /captures
 .navigation/
 *.swp
