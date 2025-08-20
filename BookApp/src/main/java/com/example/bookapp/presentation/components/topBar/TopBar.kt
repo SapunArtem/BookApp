@@ -10,6 +10,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavController
 import com.example.bookapp.presentation.navigation.Screens
 
@@ -29,6 +31,7 @@ fun TopBar(
         navigationIcon = {
             if (showBackButton) {
                 IconButton(
+                    modifier = Modifier.testTag("backBtn"),
                     onClick = { navController.popBackStack() }
                 ) {
                     Icon(
@@ -40,6 +43,7 @@ fun TopBar(
         },
         actions = {
             IconButton(
+                modifier = Modifier.testTag("settingsButton"),
                 onClick = { navController.navigate(Screens.Settings.route) }
             ) {
                 Icon(

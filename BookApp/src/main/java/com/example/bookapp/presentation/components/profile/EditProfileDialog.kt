@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.bookapp.R
@@ -54,7 +55,9 @@ fun EditProfileDialog(
                             color = Color.Black
                         )
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("InputFieldName")
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
@@ -72,12 +75,15 @@ fun EditProfileDialog(
                             color = Color.Black
                         )
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("InputFieldEmail")
                 )
             }
         },
         confirmButton = {
             Button(
+                modifier = Modifier.testTag("BtnSave"),
                 onClick = { onSave(name, email) },
                 colors = ButtonDefaults.buttonColors(
                     contentColor = MaterialTheme.colorScheme.secondary,

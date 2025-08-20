@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 
 @Composable
 fun EmptyState(text: String) {
@@ -15,6 +16,7 @@ fun EmptyState(text: String) {
         contentAlignment = Alignment.Center
     ) {
         Text(
+            modifier = Modifier.testTag("EmptyStateMessage"),
             text = text,
             color = MaterialTheme.colorScheme.tertiary,
             style = MaterialTheme.typography.titleMedium

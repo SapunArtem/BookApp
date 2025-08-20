@@ -20,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.bookapp.R
@@ -44,9 +45,11 @@ fun SearchMovieBar(
     SearchBar(
         modifier = Modifier
             .fillMaxWidth()
+            .testTag("BookSearch")
             .height(50.dp),
         inputField = {
             SearchBarDefaults.InputField(
+                modifier = Modifier.testTag("BooksSearchInputField"),
                 query = query,
                 onQueryChange = { newQuery ->
                     query = newQuery

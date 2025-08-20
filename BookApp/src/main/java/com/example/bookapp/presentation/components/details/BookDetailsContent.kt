@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -59,6 +60,7 @@ fun BookDetailsContent(
 
             Column {
                 Text(
+                    modifier = Modifier.testTag("BookTitle"),
                     text = book.title,
                     style = MaterialTheme.typography.headlineSmall
                 )
@@ -69,7 +71,9 @@ fun BookDetailsContent(
                 )
                 IconButton(
                     onClick = onFavoriteClick,
-                    modifier = Modifier.padding(top = 8.dp)
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .testTag("BtnAddFavorite")
                 ) {
                     Icon(
                         imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
@@ -89,6 +93,7 @@ fun BookDetailsContent(
             style = MaterialTheme.typography.titleMedium
         )
         Text(
+            modifier = Modifier.testTag("BookDescription"),
             text = book.description ?: stringResource(R.string.null_description),
             style = MaterialTheme.typography.bodyMedium
         )
@@ -109,7 +114,9 @@ fun BookDetailsContent(
         book.previewLink?.let { link ->
             Button(
                 onClick = { onPreview() },
-                modifier = Modifier.padding(top = 8.dp),
+                modifier = Modifier
+                    .padding(top = 8.dp)
+                    .testTag("PreviewLink"),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.tertiary,
                     contentColor = MaterialTheme.colorScheme.secondary
