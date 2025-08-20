@@ -56,7 +56,7 @@ class FavoriteTests {
 
         // Ждем загрузки
         composeTestRule.waitUntil(5000) {
-            composeTestRule.onAllNodesWithTag("BookList").fetchSemanticsNodes().isNotEmpty()
+            composeTestRule.onAllNodesWithTag("BookCard").fetchSemanticsNodes().isNotEmpty()
         }
         //Нажимаем на первый элемент списка
         composeTestRule.onAllNodes(hasTestTag("BookCard"))[0].performClick()

@@ -60,6 +60,9 @@ class ProfileAndSettings {
         // Сохраняем
         composeTestRule.onNodeWithTag("BtnSave").performClick()
 
+        composeTestRule.waitUntil(5_000) {
+            composeTestRule.onAllNodesWithTag("Test User").fetchSemanticsNodes().isNotEmpty()
+        }
         // Проверяем изменения
         composeTestRule.onNodeWithText("Test User").assertIsDisplayed()
         composeTestRule.onNodeWithText("test@example.com").assertIsDisplayed()

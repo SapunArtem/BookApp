@@ -5,8 +5,8 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performTextInput
@@ -65,7 +65,7 @@ class SearchAndNavigation {
         }
 
         // Проверяем результаты поиска
-        composeTestRule.onNodeWithText("android", substring = true, ignoreCase = true)
+        composeTestRule.onAllNodesWithText("android", substring = true, ignoreCase = true)[0]
             .assertExists()
             .assertIsDisplayed()
 
@@ -84,6 +84,9 @@ class SearchAndNavigation {
         // Возврат на главный экран
         composeTestRule.onNodeWithTag("backBtn").performClick()
 
+        composeTestRule.waitUntil(timeoutMillis = 5000) {
+            composeTestRule.onAllNodes(hasTestTag("BookList")).fetchSemanticsNodes().isNotEmpty()
+        }
         // Проверка отображения списка фильмов
         composeTestRule.onNodeWithTag("BookList").assertIsDisplayed()
     }
@@ -98,6 +101,9 @@ class SearchAndNavigation {
     @Test
     fun bottomBar_navigationItems_areDisplayedAndClickable() {
         BottomList.bottomItemsList.forEach { item ->
+            composeTestRule.waitUntil(timeoutMillis = 5000){
+                composeTestRule.onAllNodes(hasTestTag(item.title.toString())).fetchSemanticsNodes().isNotEmpty()
+            }
             composeTestRule
                 .onNodeWithTag(item.title.toString())
                 .assertIsDisplayed() // Проверка видимости
