@@ -38,7 +38,8 @@ class SettingsViewModelTest : BaseTest() {
         coEvery { localizationRepository.getCurrentLanguage() } returns "en"
         every { themeRepository.getCurrentTheme() } returns false
 
-        viewModel = SettingsViewModel(changeLanguage, localizationRepository, changeTheme, themeRepository)
+        viewModel =
+            SettingsViewModel(changeLanguage, localizationRepository, changeTheme, themeRepository)
     }
 
     @Test

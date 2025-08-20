@@ -67,7 +67,7 @@ class BooksRepositoryImplTest : BaseTest() {
                 textToSpeechPermission = "ALLOWED",
                 webReaderLink = "",
 
-            ),
+                ),
             searchInfo = null
         )
         val expectedBook = dto.toDomain()

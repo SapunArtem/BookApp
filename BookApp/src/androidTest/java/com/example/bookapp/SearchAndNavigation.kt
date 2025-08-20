@@ -15,7 +15,7 @@ import com.example.bookapp.presentation.components.bottomBar.BottomList
 import org.junit.Rule
 import org.junit.Test
 
-class SearchAndNavigation{
+class SearchAndNavigation {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<BookApp>()
 

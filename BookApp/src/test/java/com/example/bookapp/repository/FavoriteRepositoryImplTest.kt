@@ -56,7 +56,7 @@ class FavoriteRepositoryImplTest : BaseTest() {
             authors = listOf("Author"),
             categories = emptyList(),
 
-        )
+            )
         coEvery { dao.getAll() } returns flowOf(listOf(entity))
         every { mapper.mapToDomain(entity) } returns book
 

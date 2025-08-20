@@ -71,7 +71,8 @@ class ProfileViewModelTest : BaseTest() {
             1,
             "Old",
             "old@test.com",
-            "url")
+            "url"
+        )
         val profileFlow = MutableStateFlow(currentProfile)
         coEvery { getProfileUseCase() } returns profileFlow
         coEvery { updateProfileUseCase(any()) } answers {

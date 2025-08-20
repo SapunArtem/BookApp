@@ -35,7 +35,8 @@ class FavoriteViewModelTest : BaseTest() {
         getFavoriteUseCase = mockk(relaxed = true)
         toggleFavoriteUseCase = mockk(relaxed = true)
         removeFavoriteUseCase = mockk(relaxed = true)
-        viewModel = FavoriteViewModel(getFavoriteUseCase, toggleFavoriteUseCase, removeFavoriteUseCase)
+        viewModel =
+            FavoriteViewModel(getFavoriteUseCase, toggleFavoriteUseCase, removeFavoriteUseCase)
     }
 
     @Test
@@ -45,7 +46,8 @@ class FavoriteViewModelTest : BaseTest() {
                 id = "1",
                 title = "Test Book",
                 authors = listOf("Author"),
-                categories = emptyList())
+                categories = emptyList()
+            )
         )
 
         coEvery { getFavoriteUseCase() } returns flowOf(books)
@@ -87,7 +89,8 @@ class FavoriteViewModelTest : BaseTest() {
             id = "1",
             title = "Test Book",
             authors = listOf("Author"),
-            categories = emptyList())
+            categories = emptyList()
+        )
 
         coEvery { toggleFavoriteUseCase(book) } just Runs
         coEvery { getFavoriteUseCase() } returns flowOf(emptyList())
@@ -104,7 +107,8 @@ class FavoriteViewModelTest : BaseTest() {
             id = "1",
             title = "Test Book",
             authors = listOf("Author"),
-            categories = emptyList())
+            categories = emptyList()
+        )
 
         coEvery { removeFavoriteUseCase(book) } just Runs
         coEvery { getFavoriteUseCase() } returns flowOf(listOf(book))
@@ -118,11 +122,14 @@ class FavoriteViewModelTest : BaseTest() {
     @Test
     fun `isFavoriteFlow should return true when book is favorite`() = runTest {
         val bookId = "1"
-        val books = listOf(Book(
-            id = bookId,
-            title = "Test Book",
-            authors = listOf("Author"),
-            categories = emptyList()))
+        val books = listOf(
+            Book(
+                id = bookId,
+                title = "Test Book",
+                authors = listOf("Author"),
+                categories = emptyList()
+            )
+        )
 
         coEvery { getFavoriteUseCase() } returns flowOf(books)
 
