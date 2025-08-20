@@ -41,6 +41,9 @@ class ProfileAndSettings {
         // Переходим в профиль
         composeTestRule.onNodeWithTag(R.string.profile.toString()).performClick()
 
+        composeTestRule.waitUntil(5_000) {
+            composeTestRule.onAllNodesWithTag("Name").fetchSemanticsNodes().isNotEmpty()
+        }
         // Проверяем начальные данные
         composeTestRule.onNodeWithTag("Name").assertIsDisplayed()
         composeTestRule.onNodeWithTag("Email").assertIsDisplayed()
