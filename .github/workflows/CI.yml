@@ -44,7 +44,7 @@ jobs:
 
   ui-tests:
     runs-on: ubuntu-latest
-    needs: [build]   # ⚡️ НЕ ждём unit-tests, идём параллельно
+    needs: [build]   # ⚡ запускаем параллельно с unit-tests
     steps:
       - uses: actions/checkout@v3
 
@@ -62,15 +62,13 @@ jobs:
       - name: Run UI Tests on Lightweight Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 30              # ⚡️ Быстрый старт (можно 31)
-          target: aosp_atd           # ⚡️ Accelerated Test Device (headless)
+          api-level: 30              # ⚡ быстро стартует (ATD)
+          target: aosp_atd           # Accelerated Test Device (headless)
           arch: x86_64
-          force-avd-creation: false  # ⚡️ Кэширование эмулятора
+          force-avd-creation: false  # ⚡ позволяет кэшировать AVD
           emulator-options: >-
             -no-window
             -gpu swiftshader_indirect
             -no-audio
             -no-snapshot
-          script: ./gradlew connectedDebugAndroidTest \
-                   -Pandroid.testInstrumentationRunnerArguments=orchestrator \
-                   --no-daemon
+          script: ./gradlew connectedDebugAndroidTest --no-daemon
