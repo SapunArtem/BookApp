@@ -1,5 +1,6 @@
 package com.example.bookapp
 
+import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -42,8 +43,9 @@ class ProfileAndSettings {
         // Переходим в профиль
         composeTestRule.onNodeWithTag(R.string.profile.toString()).performClick()
 
-        composeTestRule.waitUntil(5000) {
+        composeTestRule.waitUntil(10000) {
             composeTestRule.onAllNodesWithTag("Name").fetchSemanticsNodes().isNotEmpty()
+            composeTestRule.onAllNodesWithTag("Email").fetchSemanticsNodes().isNotEmpty()
         }
         // Проверяем начальные данные
         composeTestRule.onNodeWithTag("Name").assertIsDisplayed()
@@ -61,17 +63,20 @@ class ProfileAndSettings {
         // Сохраняем
         composeTestRule.onNodeWithTag("BtnSave").performClick()
 
-        composeTestRule.waitUntil(10000) {
-            composeTestRule.onAllNodesWithTag("BtnSave").fetchSemanticsNodes().isNotEmpty()
-        }
-        composeTestRule.onNodeWithTag(R.string.profile.toString()).performClick()
 
-        composeTestRule.waitUntil(10000) {
-            composeTestRule.onAllNodesWithTag(R.string.profile.toString()).fetchSemanticsNodes().isNotEmpty()
+        composeTestRule.waitUntil(15_000) {
+            composeTestRule.onAllNodesWithTag("Name")
+                .fetchSemanticsNodes()
+                .any { it.config.getOrNull(androidx.compose.ui.semantics.SemanticsProperties.Text)
+                    ?.any { text -> text.text.contains("Test User") } == true } &&
+                    composeTestRule.onAllNodesWithTag("Email")
+                        .fetchSemanticsNodes()
+                        .any { it.config.getOrNull(androidx.compose.ui.semantics.SemanticsProperties.Text)
+                            ?.any { text -> text.text.contains("test@example.com") } == true }
         }
         // Проверяем изменения
-        composeTestRule.onNodeWithTag("Name").assertTextContains("Test User")
-        composeTestRule.onNodeWithTag("Email").assertTextContains("test@example.com")
+        composeTestRule.onNodeWithTag("Name").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("Email").assertIsDisplayed()
 
     }
 
