@@ -8,6 +8,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import com.example.bookapp.domain.models.Book
 import com.example.bookapp.presentation.ui.theme.Orange
 
@@ -17,7 +18,10 @@ fun BooksList(
     onBookClick: (String) -> Unit,
     isLoading: Boolean
 ) {
-    LazyColumn {
+    LazyColumn(
+        modifier = Modifier
+            .testTag("BookList")
+    ) {
         items(books) { book ->
             BookCard(
                 book = book,

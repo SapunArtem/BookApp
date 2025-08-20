@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -107,12 +108,21 @@ fun ProfileScreen(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     // Имя и email
-                    Text(text = profile.name, fontSize = 24.sp, fontWeight = FontWeight.Bold)
-                    Text(text = profile.email, fontSize = 16.sp, color = Color.Gray)
+                    Text(
+                        modifier = Modifier.testTag("Name"),
+                        text = profile.name,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold)
+                    Text(
+                        modifier = Modifier.testTag("Email"),
+                        text = profile.email,
+                        fontSize = 16.sp,
+                        color = Color.Gray)
 
                     Spacer(modifier = Modifier.height(24.dp))
 
                     Button(
+                        modifier = Modifier.testTag("BtnEditProfile"),
                         onClick = { isEditing = true },
                         colors = ButtonDefaults.buttonColors(
                             contentColor = MaterialTheme.colorScheme.secondary,

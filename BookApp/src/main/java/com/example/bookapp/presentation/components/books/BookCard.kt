@@ -28,7 +28,7 @@ fun BookCard(book: Book, onClick: () -> Unit) {
         modifier = Modifier
             .clickable(onClick = { onClick() })
             .padding(8.dp)
-            .testTag("Book"),
+            .testTag("BookCard"),
         elevation = CardDefaults.cardElevation(4.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
