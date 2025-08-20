@@ -2,50 +2,69 @@ name: Android CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ANDROID_SDK_ROOT: ${{ github.workspace }}/android-sdk
 
     steps:
-      # Проверка кода
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Настройка JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
 
-      # Настройка Android SDK
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
         with:
-          java-version: 17
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ hashFiles('**/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-
 
-      # Делаем gradlew исполняемым
+      - name: Cache Android SDK
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.ANDROID_SDK_ROOT }}
+          key: android-sdk-${{ runner.os }}-latest
+          restore-keys: android-sdk-
+
+      - name: Install Android SDK, Build Tools and Emulator
+        run: |
+          mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
+          cd $ANDROID_SDK_ROOT/cmdline-tools
+          if [ ! -f latest.zip ]; then
+            curl -o latest.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
+          fi
+          unzip -q latest.zip
+          yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
+          $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-33" "build-tools;35.0.0" "emulator" "system-images;android-33;google_apis;x86"
+
       - name: Make Gradle wrapper executable
-        run: chmod +x gradlew
+        run: chmod +x ./gradlew
 
-      # Сборка Debug APK
-      - name: Build Debug APK
+      - name: Assemble Debug
         run: ./gradlew assembleDebug --no-daemon
 
-      # Запуск unit-тестов
       - name: Run Unit Tests
         run: ./gradlew testDebugUnitTest --no-daemon
 
-      # Установка Android Emulator
-      - name: Set up Android Emulator
+      - name: Start Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 33
           target: google_apis
-          arch: x86_64
+          arch: x86
+          force-avd-creation: true
           emulator-options: -no-window -no-audio -no-boot-anim
           script: ./gradlew connectedDebugAndroidTest --no-daemon
