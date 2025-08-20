@@ -22,6 +22,13 @@ import com.example.bookapp.presentation.ui.theme.Orange
 import com.example.bookapp.presentation.viewModel.BookDetailsViewModel
 import com.example.bookapp.presentation.viewModel.FavoriteViewModel
 
+/**
+ * Экран с деталями книги.
+ *
+ * @param bookId ID книги для загрузки деталей.
+ * @param viewModel ViewModel для загрузки данных книги.
+ * @param favoriteViewModel ViewModel для управления избранными книгами.
+ */
 @Composable
 fun DetailsScreen(
     bookId: String,
@@ -33,12 +40,14 @@ fun DetailsScreen(
     val error by viewModel.error.collectAsState()
     val context = LocalContext.current
 
+    // Загрузка деталей книги при изменении bookId
     LaunchedEffect(bookId) {
         viewModel.loadDetails(bookId)
     }
 
     when {
         isLoading -> {
+            // Отображение индикатора загрузки
             Box(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -49,6 +58,7 @@ fun DetailsScreen(
         }
 
         error != null -> {
+            // Отображение ошибки и возможность повторной загрузки
             ErrorMessage(error!!) {
                 viewModel.loadDetails(bookId)
 
@@ -56,9 +66,11 @@ fun DetailsScreen(
 
         }
 
-        bookDetails == null -> EmptyState(text = stringResource(R.string.movie_etails_not_available))
+        bookDetails == null -> // Если книга не найдена
+             EmptyState(text = stringResource(R.string.movie_etails_not_available))
 
         else -> {
+            // Отображение информации о книге
             bookDetails?.let { item ->
                 val isFavorite by favoriteViewModel
                     .isFavoriteFlow(item.id)

@@ -16,6 +16,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.bookapp.R
 
+/**
+ * Отображает сообщение об ошибке с кнопкой повтора.
+ *
+ * @param error Текст ошибки.
+ * @param onRetry Lambda-функция для повтора действия.
+ */
 @Composable
 fun ErrorMessage(
     error: String,

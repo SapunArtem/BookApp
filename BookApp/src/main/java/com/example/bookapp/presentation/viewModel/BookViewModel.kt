@@ -12,16 +12,24 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel для домашнего экрана и поиска книг.
+ * Управляет списком книг, состоянием загрузки и последним поисковым запросом.
+ */
 @HiltViewModel
 class BookViewModel @Inject constructor(
     private val getBooksUseCase: GetBooksUseCase
 ) : ViewModel() {
+
+    /** Состояние экрана с флагами загрузки и ошибок */
     private val _state = mutableStateOf(BooksState())
     val state: State<BooksState> = _state
 
+    /** Список книг */
     private val _books = MutableStateFlow<List<Book>>(emptyList())
     val books: StateFlow<List<Book>> = _books
 
+    /** Последний поисковый запрос */
     private var _lastQuery = MutableStateFlow("")
     val lastQuery: StateFlow<String> = _lastQuery
 
@@ -29,10 +37,15 @@ class BookViewModel @Inject constructor(
         searchBooks("а")
     }
 
+    /** Обновляет последний поисковый запрос */
     fun updateLastQuery(query: String) {
         _lastQuery.value = query
     }
 
+    /**
+     * Выполняет поиск книг по запросу
+     * @param query - поисковый запрос
+     */
     fun searchBooks(query: String) {
         if (query.isBlank()) return
 
@@ -63,7 +76,11 @@ class BookViewModel @Inject constructor(
     }
 }
 
-
+/**
+ * Состояние домашнего экрана с книгами.
+ * @param isLoading - индикатор загрузки
+ * @param error - сообщение об ошибке
+ */
 data class BooksState(
     val isLoading: Boolean = false,
     val error: String? = null

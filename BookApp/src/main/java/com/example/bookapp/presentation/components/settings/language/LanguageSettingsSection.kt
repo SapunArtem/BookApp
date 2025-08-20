@@ -19,6 +19,13 @@ import com.example.bookapp.presentation.components.settings.SettingsItem
 import com.example.bookapp.presentation.ui.theme.AlmostBack
 import com.example.bookapp.presentation.ui.theme.AppTheme
 
+/**
+ * Отображает секцию выбора языка с заголовком и списком опций.
+ *
+ * @param items Список доступных языков.
+ * @param currentLanguage Текущий выбранный язык.
+ * @param setLanguage Lambda-функция для изменения языка.
+ */
 @Composable
 fun LanguageSettingSection(
     items: List<SettingsItem.LanguageSettings>,

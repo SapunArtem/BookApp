@@ -17,6 +17,13 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * Тесты для [BooksRepositoryImpl].
+ *
+ * Проверяется:
+ * - успешное получение списка книг;
+ * - успешное получение деталей книги по id.
+ */
 class BooksRepositoryImplTest : BaseTest() {
     private lateinit var repository: BooksRepositoryImpl
     private lateinit var remoteDataSources: BooksRemoteDataSources
@@ -27,6 +34,10 @@ class BooksRepositoryImplTest : BaseTest() {
         repository = BooksRepositoryImpl(remoteDataSources)
     }
 
+    /**
+     * Тест проверяет, что метод [BooksRepositoryImpl.getBooks]
+     * возвращает корректно замапленный список книг при успешном ответе API.
+     */
     @Test
     fun `getBooks should return mapped books on success`() = runTest {
 
@@ -83,6 +94,10 @@ class BooksRepositoryImplTest : BaseTest() {
         assertThat(result.getOrNull()).containsExactly(expectedBook)
     }
 
+    /**
+     * Тест проверяет, что метод [BooksRepositoryImpl.getBookDetails]
+     * возвращает замапленную модель [Book] при успешном ответе API.
+     */
     @Test
     fun `getBookDetails should return mapped book on success`() = runTest {
         val dto = BookDto(

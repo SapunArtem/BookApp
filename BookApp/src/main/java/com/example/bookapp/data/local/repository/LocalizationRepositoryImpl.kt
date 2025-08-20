@@ -6,7 +6,9 @@ import com.example.bookapp.presentation.components.settings.language.Localizatio
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-
+/**
+ * Репозиторий для управления языковыми настройками приложения.
+ */
 class LocalizationRepositoryImpl @Inject constructor(
     @ApplicationContext private var context: Context,
     private val localizationManager: LocalizationManager
@@ -20,6 +22,9 @@ class LocalizationRepositoryImpl @Inject constructor(
         return localizationManager.getCurrentLanguage(context)
     }
 
+    /**
+     * Обновление контекста (например, после смены языка).
+     */
     fun updateContext(newContext: Context) {
         context = newContext
     }

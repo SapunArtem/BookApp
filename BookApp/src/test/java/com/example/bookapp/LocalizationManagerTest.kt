@@ -19,6 +19,14 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
+/**
+ * Тесты для [LocalizationManager].
+ *
+ * Проверяется:
+ * - сохранение выбранного языка и обновление ресурсов;
+ * - возврат сохранённого языка;
+ * - корректное применение сохранённой локали к контексту.
+ */
 @RunWith(RobolectricTestRunner::class)
 class LocalizationManagerTest {
     @get:Rule
@@ -37,6 +45,10 @@ class LocalizationManagerTest {
         every { sharedPreferences.getString(any(), any()) } returns "en"
     }
 
+    /**
+     * Тест проверяет, что метод [LocalizationManager.setLocale]
+     * сохраняет выбранный язык в [SharedPreferences] и обновляет конфигурацию ресурсов.
+     */
     @Test
     fun `setLocale should persist language and update resources`() {
         val languageCode = "ru"
@@ -56,6 +68,10 @@ class LocalizationManagerTest {
         verify { resources.updateConfiguration(any(), displayMetrics) }
     }
 
+    /**
+     * Тест проверяет, что метод [LocalizationManager.getCurrentLanguage]
+     * возвращает сохранённый язык из [SharedPreferences].
+     */
     @Test
     fun `getCurrentLanguage should return saved language`() {
         val expectedLanguage = "ru"
@@ -66,6 +82,10 @@ class LocalizationManagerTest {
         assertThat(result).isEqualTo(expectedLanguage)
     }
 
+    /**
+     * Тест проверяет, что метод [LocalizationManager.wrapContext]
+     * применяет сохранённую локаль к переданному контексту.
+     */
     @Test
     fun `wrapContext applies saved locale`() {
         val context = ApplicationProvider.getApplicationContext<Context>()

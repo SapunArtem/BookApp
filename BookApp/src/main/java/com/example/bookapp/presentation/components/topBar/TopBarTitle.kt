@@ -7,6 +7,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import com.example.bookapp.R
 
+/**
+ * Отображает заголовок TopBar с названием приложения.
+ */
 @Composable
 fun TopBarTitle() {
     Row(

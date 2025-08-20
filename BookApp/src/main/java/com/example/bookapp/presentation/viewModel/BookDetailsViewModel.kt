@@ -14,19 +14,31 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel для отображения деталей книги.
+ * Загружает информацию о книге по её ID и управляет состоянием загрузки и ошибок.
+ */
 @HiltViewModel
 class BookDetailsViewModel @Inject constructor(
     private val getBooksDetailsUseCase: GetBooksDetailsUseCase,
 ) : ViewModel() {
+
+    /** Состояние с деталями книги. Null, если данные еще не загружены */
     private val _bookDetails = MutableStateFlow<Book?>(null)
     val bookDetails: StateFlow<Book?> = _bookDetails
 
+    /** Флаг загрузки данных книги */
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
+    /** Сообщение об ошибке загрузки книги, null если ошибок нет */
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
 
+    /**
+     * Загружает детали книги по ID.
+     * @param bookId - идентификатор книги
+     */
     fun loadDetails(bookId: String) {
         viewModelScope.launch {
             _isLoading.value = true
@@ -47,6 +59,11 @@ class BookDetailsViewModel @Inject constructor(
 
     }
 
+    /**
+     * Открывает ссылку в браузере.
+     * @param context - контекст для запуска Intent
+     * @param uri - ссылка для открытия
+     */
     fun openInBrowser(context: Context, uri: String) {
         val intent = Intent(Intent.ACTION_VIEW, uri.toUri())
         context.startActivity(intent)

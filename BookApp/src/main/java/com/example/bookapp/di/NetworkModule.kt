@@ -12,10 +12,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 import com.example.bookapp.utils.Constant.Companion.BASE_URL
 import javax.inject.Singleton
 
+/**
+ * Модуль для предоставления сетевых зависимостей (Retrofit, OkHttp, API).
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    /**
+     * Предоставление Retrofit.
+     */
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit {
@@ -26,6 +32,9 @@ object NetworkModule {
             .build()
     }
 
+    /**
+     * Предоставление OkHttpClient с RetryInterceptor.
+     */
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
@@ -34,12 +43,18 @@ object NetworkModule {
             .build()
     }
 
+    /**
+     * Предоставление интерсептора для повторных попыток сетевых запросов.
+     */
     @Provides
     @Singleton
     fun provideRetryInterceptor(): RetryInterceptor {
         return RetryInterceptor()
     }
 
+    /**
+     * Предоставление BooksServiceApi.
+     */
     @Provides
     @Singleton
     fun provideBooksApi(retrofit: Retrofit): BooksServiceApi {

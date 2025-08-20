@@ -22,6 +22,14 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * Тесты для [FavoriteViewModel].
+ *
+ * Проверяется:
+ * - загрузка избранных книг;
+ * - добавление/удаление книги из избранного;
+ * - реактивная проверка, является ли книга избранной.
+ */
 @ExperimentalCoroutinesApi
 class FavoriteViewModelTest : BaseTest() {
     private lateinit var viewModel: FavoriteViewModel
@@ -39,6 +47,10 @@ class FavoriteViewModelTest : BaseTest() {
             FavoriteViewModel(getFavoriteUseCase, toggleFavoriteUseCase, removeFavoriteUseCase)
     }
 
+    /**
+     * Тест проверяет, что при наличии избранных книг
+     * состояние обновляется на [FavoriteUiState.Success].
+     */
     @Test
     fun `loadFavorites should update uiState with Success when favorites exist`() = runTest {
         val books = listOf(
@@ -60,6 +72,10 @@ class FavoriteViewModelTest : BaseTest() {
         assertThat((uiState as FavoriteUiState.Success).favorites).isEqualTo(books)
     }
 
+    /**
+     * Тест проверяет, что при отсутствии избранных книг
+     * состояние обновляется на [FavoriteUiState.Empty].
+     */
     @Test
     fun `loadFavorites should update uiState with Empty when no favorites`() = runTest {
         coEvery { getFavoriteUseCase() } returns flowOf(emptyList())
@@ -70,6 +86,10 @@ class FavoriteViewModelTest : BaseTest() {
         assertThat(viewModel.uiState.value).isInstanceOf(FavoriteUiState.Empty::class.java)
     }
 
+    /**
+     * Тест проверяет, что при ошибке получения данных
+     * состояние обновляется на [FavoriteUiState.Error] с сообщением ошибки.
+     */
     @Test
     fun `loadFavorites should update uiState with Error on failure`() = runTest {
         val error = "Error message"
@@ -83,6 +103,10 @@ class FavoriteViewModelTest : BaseTest() {
         assertThat((viewModel.uiState.value as FavoriteUiState.Error).message).isEqualTo(error)
     }
 
+    /**
+     * Тест проверяет, что при добавлении книги в избранное
+     * вызывается [ToggleFavoriteUseCase].
+     */
     @Test
     fun `toggleFavorite should call toggleFavoriteUseCase when not favorite`() = runTest {
         val book = Book(
@@ -101,6 +125,10 @@ class FavoriteViewModelTest : BaseTest() {
         coVerify { toggleFavoriteUseCase(book) }
     }
 
+    /**
+     * Тест проверяет, что при удалении книги из избранного
+     * вызывается [RemoveFavoriteUseCase].
+     */
     @Test
     fun `toggleFavorite should call removeFavoriteUseCase when favorite`() = runTest {
         val book = Book(
@@ -119,6 +147,10 @@ class FavoriteViewModelTest : BaseTest() {
         coVerify { removeFavoriteUseCase(book) }
     }
 
+    /**
+     * Тест проверяет, что метод [FavoriteViewModel.isFavoriteFlow]
+     * возвращает true, если книга есть в списке избранных.
+     */
     @Test
     fun `isFavoriteFlow should return true when book is favorite`() = runTest {
         val bookId = "1"

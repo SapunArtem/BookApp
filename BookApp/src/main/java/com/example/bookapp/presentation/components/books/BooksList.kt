@@ -12,6 +12,14 @@ import androidx.compose.ui.platform.testTag
 import com.example.bookapp.domain.models.Book
 import com.example.bookapp.presentation.ui.theme.Orange
 
+/**
+ * Список книг с возможностью обработки клика по каждой книге.
+ * Отображает индикатор загрузки при isLoading = true.
+ *
+ * @param books список книг для отображения
+ * @param onBookClick лямбда, вызываемая при клике на книгу (передается ID книги)
+ * @param isLoading флаг, показывающий состояние загрузки данных
+ */
 @Composable
 fun BooksList(
     books: List<Book>,

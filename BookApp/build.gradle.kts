@@ -65,8 +65,8 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.androidx.core)
     testImplementation(libs.androidx.core.testing)
-    testImplementation("com.google.truth:truth:1.4.4")
-    testImplementation("org.robolectric:robolectric:4.12.1")
+    testImplementation(libs.truth)
+    testImplementation(libs.robolectric)
 
     //DataStore
     implementation(libs.androidx.datastore.preferences.core)

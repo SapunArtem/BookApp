@@ -9,13 +9,22 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
+/**
+ * Модуль для привязки реализаций к интерфейсам (Binds).
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 interface DataModule {
 
+    /**
+     * Привязка реализации удалённого источника данных книг к интерфейсу.
+     */
     @Binds
     fun bindBooksRemoteDataSource(impl: BooksRemoteDataSourcesImpl): BooksRemoteDataSources
 
+    /**
+     * Привязка реализации репозитория книг к интерфейсу.
+     */
     @Binds
     fun bindBooksRepository(impl: BooksRepositoryImpl): BookRepository
 }

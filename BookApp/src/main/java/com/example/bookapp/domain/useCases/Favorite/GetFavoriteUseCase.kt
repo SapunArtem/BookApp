@@ -5,6 +5,9 @@ import com.example.bookapp.domain.repository.FavoriteRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+/**
+ * Use case для получения всех избранных книг.
+ */
 class GetFavoriteUseCase @Inject constructor(
     private val repository: FavoriteRepository
 ) {

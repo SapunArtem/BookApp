@@ -25,6 +25,13 @@ import androidx.compose.ui.unit.dp
 import com.example.bookapp.R
 import com.example.bookapp.domain.models.Profile
 
+/**
+ * Диалог редактирования профиля пользователя с полями Имя и Email.
+ *
+ * @param profile объект профиля пользователя
+ * @param onDismiss лямбда для закрытия диалога без сохранения
+ * @param onSave лямбда для сохранения изменений, принимает новые имя и email
+ */
 @Composable
 fun EditProfileDialog(
     profile: Profile,

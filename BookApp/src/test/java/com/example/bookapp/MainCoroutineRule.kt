@@ -8,6 +8,11 @@ import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
+/**
+ * Правило для замены главного [Dispatchers.Main] на тестовый диспетчер во время выполнения тестов.
+ *
+ * Это позволяет управлять корутинами через [TestDispatcher] и синхронно выполнять suspend-функции.
+ */
 class MainCoroutineRule : TestWatcher() {
     lateinit var testDispatcher: TestDispatcher
 

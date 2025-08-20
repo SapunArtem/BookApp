@@ -26,13 +26,19 @@ import com.example.bookapp.R
 import com.example.bookapp.presentation.components.state.EmptyState
 import com.example.bookapp.presentation.components.state.ErrorMessage
 import com.example.bookapp.presentation.components.books.BooksList
-import com.example.bookapp.presentation.components.searchBar.SearchMovieBar
+import com.example.bookapp.presentation.components.searchBar.SearchBookBar
 import com.example.bookapp.presentation.navigation.Screens
 import com.example.bookapp.presentation.ui.theme.Orange
 import com.example.bookapp.presentation.viewModel.BookViewModel
 import kotlinx.coroutines.delay
 
 
+/**
+ * Главный экран приложения.
+ *
+ * @param navController NavController для навигации на другие экраны.
+ * @param viewModel ViewModel для получения списка книг и состояния загрузки.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -52,6 +58,7 @@ fun HomeScreen(
         }
     }
 
+    // Обновление состояния pull-to-refresh
     PullToRefreshBox(
         isRefreshing = isRefreshing,
         onRefresh = {
@@ -63,7 +70,8 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            SearchMovieBar(
+            // Поисковая панель
+            SearchBookBar(
                 viewModel = viewModel,
                 onSearch = { query ->
                     viewModel.searchBooks(query)
@@ -93,6 +101,7 @@ fun HomeScreen(
                 }
 
                 else -> {
+                    // Отображение списка книг
                     BooksList(
                         books = books,
                         onBookClick = { bookId ->

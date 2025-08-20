@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+/**
+ * Репозиторий для работы с профилем пользователя.
+ */
 class ProfileRepositoryImpl @Inject constructor(
     private val dao: ProfileDao
 ) : ProfileRepository {

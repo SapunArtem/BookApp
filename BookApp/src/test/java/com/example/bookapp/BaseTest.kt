@@ -11,6 +11,13 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 
+/**
+ * Базовый класс для unit-тестов ViewModel.
+ *
+ * Здесь подключаются правила:
+ * - [InstantTaskExecutorRule] — для синхронного выполнения LiveData.
+ * - [MainCoroutineRule] — для замены [Dispatchers.Main].
+ */
 @OptIn(ExperimentalCoroutinesApi::class)
 abstract class BaseTest {
     @get:Rule

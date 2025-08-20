@@ -31,6 +31,16 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.bookapp.R
 import com.example.bookapp.domain.models.Book
 
+/**
+ * Контент экрана деталей книги, включая обложку, авторов, описание,
+ * мета-данные и кнопки для предпросмотра и добавления в избранное.
+ *
+ * @param book объект книги для отображения
+ * @param onPreview лямбда для обработки нажатия на кнопку предпросмотра
+ * @param onFavoriteClick лямбда для добавления/удаления книги из избранного
+ * @param isFavorite флаг, является ли книга избранной
+ * @param modifier модификатор Compose
+ */
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun BookDetailsContent(
@@ -45,6 +55,7 @@ fun BookDetailsContent(
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
+        // Отображение обложки и информации о книге
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -87,7 +98,7 @@ fun BookDetailsContent(
 
         HorizontalDivider()
 
-
+        // Описание книги
         Text(
             text = stringResource(R.string.description),
             style = MaterialTheme.typography.titleMedium
@@ -101,6 +112,7 @@ fun BookDetailsContent(
 
         HorizontalDivider()
 
+        // Метаданные книги
         val metaItems = listOfNotNull(
             book.publishedDate?.let { "${stringResource(R.string.published)}: $it" },
             book.publisher?.let { "${stringResource(R.string.publisher)}: $it" },
@@ -111,6 +123,7 @@ fun BookDetailsContent(
             Text(text = item)
         }
 
+        // Кнопка предпросмотра
         book.previewLink?.let { link ->
             Button(
                 onClick = { onPreview() },

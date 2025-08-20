@@ -2,6 +2,9 @@ package com.example.bookapp.data.local
 
 import androidx.room.TypeConverter
 
+/**
+ * Конвертеры для Room (списки, булевы значения).
+ */
 class Converts {
     @TypeConverter
     fun fromList(list: List<String>): String = list.joinToString("|")

@@ -24,6 +24,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.bookapp.presentation.components.settings.SettingsItem
 
+/**
+ * Отображает одну опцию темы (светлая/темная) в списке настроек.
+ *
+ * @param item Объект настроек темы.
+ * @param isSelected Флаг, показывающий выбран ли данный вариант.
+ * @param onSelect Lambda-функция, вызываемая при выборе опции.
+ */
 @Composable
 fun ThemeOption(
     item: SettingsItem.ThemeSettings,

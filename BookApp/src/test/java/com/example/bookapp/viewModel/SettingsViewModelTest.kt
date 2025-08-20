@@ -20,7 +20,13 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
-
+/**
+ * Тесты для [SettingsViewModel].
+ *
+ * Проверяется:
+ * - смена языка и темы приложения;
+ * - обновление контекста в репозитории локализации.
+ */
 class SettingsViewModelTest : BaseTest() {
     private lateinit var viewModel: SettingsViewModel
     private lateinit var changeLanguage: ChangeAppLanguageUseCase
@@ -42,6 +48,10 @@ class SettingsViewModelTest : BaseTest() {
             SettingsViewModel(changeLanguage, localizationRepository, changeTheme, themeRepository)
     }
 
+    /**
+     * Тест проверяет, что при смене языка вызывается [ChangeAppLanguageUseCase],
+     * а поле [SettingsViewModel.currentLanguage] обновляется.
+     */
     @Test
     fun `setLanguage should call use case and update currentLanguage`() = runTest {
         val languageCode = "ru"
@@ -55,6 +65,10 @@ class SettingsViewModelTest : BaseTest() {
         assertThat(viewModel.currentLanguage.value).isEqualTo(languageCode)
     }
 
+    /**
+     * Тест проверяет, что при смене темы вызывается [ChangeAppThemeUseCase],
+     * а поле [SettingsViewModel.isDarkTheme] обновляется.
+     */
     @Test
     fun `setTheme should call use case and update isDarkTheme`() = runTest {
         val isDark = true
@@ -68,6 +82,10 @@ class SettingsViewModelTest : BaseTest() {
         assertThat(viewModel.isDarkTheme.value).isTrue()
     }
 
+    /**
+     * Тест проверяет, что метод [SettingsViewModel.updateContext]
+     * обновляет контекст в [LocalizationRepository] и корректно обновляет язык.
+     */
     @Test
     fun `updateContext should update context in repository`() {
         val context = mockk<Context>()

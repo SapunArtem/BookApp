@@ -42,6 +42,11 @@ import com.example.bookapp.R
 import com.example.bookapp.presentation.components.profile.EditProfileDialog
 import com.example.bookapp.presentation.viewModel.ProfileViewModel
 
+/**
+ * Экран профиля пользователя.
+ *
+ * @param viewModel ViewModel для работы с данными профиля.
+ */
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ProfileScreen(

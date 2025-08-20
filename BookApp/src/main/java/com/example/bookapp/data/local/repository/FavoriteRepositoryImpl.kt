@@ -8,6 +8,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+/**
+ * Репозиторий для работы с избранными книгами.
+ * Использует FavoriteDao и FavoriteMapper.
+ */
 class FavoriteRepositoryImpl @Inject constructor(
     private val dao: FavoriteDao,
     private val mapper: FavoriteMapper

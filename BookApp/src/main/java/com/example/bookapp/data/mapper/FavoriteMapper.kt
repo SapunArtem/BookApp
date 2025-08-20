@@ -4,6 +4,9 @@ import com.example.bookapp.data.local.entity.FavoriteEntity
 import com.example.bookapp.domain.models.Book
 import javax.inject.Inject
 
+/**
+ * Маппер для преобразования между FavoriteEntity и Book.
+ */
 class FavoriteMapper @Inject constructor() {
     fun mapToDomain(entity: FavoriteEntity): Book {
         return Book(
@@ -33,7 +36,7 @@ class FavoriteMapper @Inject constructor() {
             publishedDate = book.publishedDate,
             description = book.description,
             pageCount = book.pageCount,
-            categories = book.categories?.joinToString("|") ?: "",
+            categories = book.categories.joinToString("|") ,
             thumbnail = book.thumbnail,
             language = book.language,
             previewLink = book.previewLink,

@@ -13,6 +13,10 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel для работы с профилем пользователя.
+ * Загружает профиль, обновляет его и управляет состоянием загрузки.
+ */
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
@@ -20,6 +24,7 @@ class ProfileViewModel @Inject constructor(
 
 ) : ViewModel() {
 
+    /** Состояние профиля пользователя */
     private val _state = MutableStateFlow(ProfileState())
     val state: StateFlow<ProfileState> = _state
 
@@ -42,6 +47,11 @@ class ProfileViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
+    /**
+     * Обновляет данные профиля
+     * @param name - новое имя
+     * @param email - новый email
+     */
     fun updateProfile(name: String, email: String) {
         val current = state.value.profile
         if (current != null) {
@@ -53,6 +63,7 @@ class ProfileViewModel @Inject constructor(
     }
 }
 
+/** Состояние экрана профиля пользователя */
 data class ProfileState(
     val profile: Profile? = null,
     val isLoading: Boolean = true,

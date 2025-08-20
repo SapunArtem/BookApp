@@ -20,7 +20,13 @@ import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Test
 
-
+/**
+ * Тесты для [ProfileViewModel].
+ *
+ * Проверяется:
+ * - инициализация профиля (нового или существующего);
+ * - обновление данных профиля.
+ */
 class ProfileViewModelTest : BaseTest() {
     private lateinit var viewModel: ProfileViewModel
     private lateinit var getProfileUseCase: GetProfileUseCase
@@ -33,6 +39,10 @@ class ProfileViewModelTest : BaseTest() {
         viewModel = ProfileViewModel(getProfileUseCase, updateProfileUseCase)
     }
 
+    /**
+     * Тест проверяет, что при отсутствии сохранённого профиля
+     * создаётся новый с дефолтными значениями и сохраняется через [UpdateProfileUseCase].
+     */
     @Test
     fun `init should set default profile when no profile exists`() = runTest {
         coEvery { getProfileUseCase() } returns flowOf(null)
@@ -46,6 +56,10 @@ class ProfileViewModelTest : BaseTest() {
         coVerify { updateProfileUseCase(any()) }
     }
 
+    /**
+     * Тест проверяет, что при наличии сохранённого профиля
+     * он корректно устанавливается в [ProfileViewModel.state].
+     */
     @Test
     fun `init should set existing profile`() = runTest {
         val profile = Profile(
@@ -62,6 +76,10 @@ class ProfileViewModelTest : BaseTest() {
         assertThat(viewModel.state.value.profile).isEqualTo(profile)
     }
 
+    /**
+     * Тест проверяет, что метод [ProfileViewModel.updateProfile]
+     * обновляет данные профиля (имя и email) и вызывает [UpdateProfileUseCase].
+     */
     @Test
     fun `updateProfile should update profile`() = runTest {
         val testDispatcher = StandardTestDispatcher(testScheduler)

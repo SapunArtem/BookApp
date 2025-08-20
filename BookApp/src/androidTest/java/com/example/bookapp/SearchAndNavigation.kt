@@ -15,10 +15,29 @@ import com.example.bookapp.presentation.components.bottomBar.BottomList
 import org.junit.Rule
 import org.junit.Test
 
+/**
+ * UI-тесты для поиска книг и навигации внутри приложения.
+ *
+ * Проверяется:
+ * - работа поиска книг;
+ * - переход на экран деталей книги;
+ * - возврат обратно на главный экран;
+ * - кликабельность и отображение элементов нижней панели навигации.
+ */
 class SearchAndNavigation {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<BookApp>()
 
+    /**
+     * Тестирует сценарий поиска книги и перехода на экран деталей.
+     *
+     * Шаги:
+     * 1. Дождаться загрузки списка книг.
+     * 2. Выполнить поиск книги по слову "android".
+     * 3. Проверить, что книга отобразилась в результатах поиска.
+     * 4. Перейти на экран деталей книги и убедиться в наличии данных.
+     * 5. Вернуться на главный экран и проверить, что список книг отображается снова.
+     */
     @Test
     fun searchBooksAndNavigateToDetails() {
 
@@ -69,7 +88,13 @@ class SearchAndNavigation {
         composeTestRule.onNodeWithTag("BookList").assertIsDisplayed()
     }
 
-
+    /**
+     * Тестирует работу нижней панели навигации.
+     *
+     * Проверяется:
+     * - что все пункты навигации отображаются;
+     * - что каждый пункт кликабелен.
+     */
     @Test
     fun bottomBar_navigationItems_areDisplayedAndClickable() {
         BottomList.bottomItemsList.forEach { item ->

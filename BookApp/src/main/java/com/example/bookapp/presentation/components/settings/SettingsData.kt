@@ -2,7 +2,12 @@ package com.example.bookapp.presentation.components.settings
 
 import com.example.bookapp.R
 
+/**
+ * Объект SettingsData содержит данные для настроек приложения,
+ * включая список доступных тем, языков и заголовков секций.
+ */
 object SettingsData {
+    /** Список доступных тем приложения */
     val theme = listOf(
         SettingsItem.ThemeSettings(
             titleRes = R.string.light_theme,
@@ -16,6 +21,7 @@ object SettingsData {
         ),
     )
 
+    /** Список доступных языков приложения */
     val language = listOf(
         SettingsItem.LanguageSettings(
             titleRes = R.string.english,

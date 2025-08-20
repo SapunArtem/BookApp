@@ -19,6 +19,13 @@ import com.example.bookapp.presentation.components.settings.SettingsData
 import com.example.bookapp.presentation.components.settings.SettingsItem
 import com.example.bookapp.presentation.ui.theme.AlmostBack
 
+/**
+ * Отображает секцию выбора темы с заголовком и списком опций.
+ *
+ * @param items Список доступных тем.
+ * @param isDarkTheme Флаг текущей темы.
+ * @param setTheme Lambda-функция для изменения темы.
+ */
 @Composable
 fun ThemeSettingsSection(
     items: List<SettingsItem.ThemeSettings>,

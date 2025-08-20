@@ -3,6 +3,9 @@ package com.example.bookapp.domain.useCases.Settings
 import com.example.bookapp.domain.repository.LocalizationRepository
 import javax.inject.Inject
 
+/**
+ * Use case для смены языка приложения.
+ */
 class ChangeAppLanguageUseCase @Inject constructor(
     private val localizationRepository: LocalizationRepository
 ) {

@@ -11,7 +11,14 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
-
+/**
+ * Тесты для [BookViewModel].
+ *
+ * Проверяется:
+ * - успешный поиск книг;
+ * - обработка ошибок поиска;
+ * - обновление последнего поискового запроса.
+ */
 class BookViewModelTest : BaseTest() {
     private lateinit var viewModel: BookViewModel
     private lateinit var getBooksUseCase: GetBooksUseCase
@@ -22,6 +29,13 @@ class BookViewModelTest : BaseTest() {
         viewModel = BookViewModel(getBooksUseCase)
     }
 
+    /**
+     * Тест проверяет, что при успешном поиске:
+     * - загрузка завершается,
+     * - ошибок нет,
+     * - список книг обновляется,
+     * - сохраняется последний запрос.
+     */
     @Test
     fun `searchBooks should update state and books on success`() = runTest {
         val query = "test"
@@ -45,6 +59,12 @@ class BookViewModelTest : BaseTest() {
         assertThat(viewModel.lastQuery.value).isEqualTo(query)
     }
 
+    /**
+     * Тест проверяет, что при ошибке поиска:
+     * - загрузка завершается,
+     * - ошибка сохраняется,
+     * - список книг очищается.
+     */
     @Test
     fun `searchBooks should handle error`() = runTest {
         val query = "test"
@@ -59,6 +79,10 @@ class BookViewModelTest : BaseTest() {
         assertThat(viewModel.books.value).isEmpty()
     }
 
+    /**
+     * Тест проверяет, что метод [BookViewModel.updateLastQuery]
+     * корректно обновляет значение последнего поискового запроса.
+     */
     @Test
     fun `updateLastQuery should update lastQuery`() {
         val query = "new query"

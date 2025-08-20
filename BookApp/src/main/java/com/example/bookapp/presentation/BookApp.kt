@@ -14,6 +14,9 @@ import com.example.bookapp.presentation.screens.App
 import com.example.bookapp.presentation.ui.theme.BookAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Главная активность приложения BookApp
+ */
 @AndroidEntryPoint
 class BookApp : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +36,9 @@ class BookApp : ComponentActivity() {
         }
     }
 
+    /**
+     * Переопределяем attachBaseContext для поддержки локализации
+     */
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LocalizationManager.wrapContext(newBase))
     }

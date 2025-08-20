@@ -11,7 +11,13 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
-
+/**
+ * Тесты для [GetBooksDetailsUseCase].
+ *
+ * Проверяется:
+ * - успешное получение книги по id;
+ * - обработка ошибки при получении деталей книги.
+ */
 class GetBooksDetailsUseCaseTest : BaseTest() {
     private lateinit var useCase: GetBooksDetailsUseCase
     private lateinit var repository: BookRepository
@@ -22,6 +28,10 @@ class GetBooksDetailsUseCaseTest : BaseTest() {
         useCase = GetBooksDetailsUseCase(repository)
     }
 
+    /**
+     * Тест проверяет, что при успешном запросе [BookRepository.getBookDetails]
+     * возвращается корректный объект [Book].
+     */
     @Test
     fun `invoke should return book details on success`() = runTest {
         // Given
@@ -40,6 +50,9 @@ class GetBooksDetailsUseCaseTest : BaseTest() {
         assertThat(result.getOrNull()).isEqualTo(book)
     }
 
+    /**
+     * Тест проверяет, что при ошибке запроса возвращается [Result.failure].
+     */
     @Test
     fun `invoke should return failure on error`() = runTest {
         val bookId = "1"

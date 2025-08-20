@@ -11,7 +11,13 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
-
+/**
+ * Тесты для [BookDetailsViewModel].
+ *
+ * Проверяется:
+ * - успешная загрузка деталей книги,
+ * - корректная обработка ошибок.
+ */
 class BookDetailsViewModelTest : BaseTest() {
     private lateinit var viewModel: BookDetailsViewModel
     private lateinit var getBooksDetailsUseCase: GetBooksDetailsUseCase
@@ -22,6 +28,10 @@ class BookDetailsViewModelTest : BaseTest() {
         viewModel = BookDetailsViewModel(getBooksDetailsUseCase)
     }
 
+    /**
+     * Тест проверяет, что при успешном ответе use case
+     * [BookDetailsViewModel.bookDetails] обновляется, а [BookDetailsViewModel.error] остаётся null.
+     */
     @Test
     fun `loadDetails should update bookDetails on success`() = runTest {
         val bookId = "1"
@@ -41,6 +51,10 @@ class BookDetailsViewModelTest : BaseTest() {
         assertThat(viewModel.bookDetails.value).isEqualTo(book)
     }
 
+    /**
+     * Тест проверяет, что при ошибке загрузки деталей
+     * [BookDetailsViewModel.error] содержит сообщение об ошибке, а [bookDetails] остаётся null.
+     */
     @Test
     fun `loadDetails should handle error`() = runTest {
         val bookId = "1"

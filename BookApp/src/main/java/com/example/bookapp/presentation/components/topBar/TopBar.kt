@@ -15,6 +15,14 @@ import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavController
 import com.example.bookapp.presentation.navigation.Screens
 
+
+/**
+ * Отображает верхнюю панель (TopBar) с кнопкой назад и кнопкой настроек.
+ *
+ * @param navController NavController для навигации.
+ * @param showBackButton Флаг отображения кнопки назад.
+ * @param showTitle Флаг отображения заголовка приложения.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(

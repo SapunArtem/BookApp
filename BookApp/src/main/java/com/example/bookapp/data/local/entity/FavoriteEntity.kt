@@ -3,6 +3,9 @@ package com.example.bookapp.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Сущность для хранения данных об избранных книгах.
+ */
 @Entity(tableName = "favorites")
 data class FavoriteEntity(
     @PrimaryKey val id: String,

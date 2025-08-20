@@ -9,6 +9,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 
+/**
+ * Отображает состояние пустого экрана с сообщением.
+ *
+ * @param text Текст сообщения.
+ */
 @Composable
 fun EmptyState(text: String) {
     Box(

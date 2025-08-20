@@ -26,9 +26,15 @@ import androidx.compose.ui.unit.dp
 import com.example.bookapp.R
 import com.example.bookapp.presentation.viewModel.BookViewModel
 
+/**
+ * Поле поиска книг с сохранением последнего запроса.
+ *
+ * @param viewModel экземпляр [BookViewModel] для управления состоянием поиска
+ * @param onSearch лямбда, вызываемая при подтверждении поиска (передается текст запроса)
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchMovieBar(
+fun SearchBookBar(
     viewModel: BookViewModel,
     onSearch: (String) -> Unit
 ) {

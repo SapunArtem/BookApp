@@ -4,6 +4,9 @@ import com.example.bookapp.domain.models.Profile
 import com.example.bookapp.domain.repository.ProfileRepository
 import javax.inject.Inject
 
+/**
+ * Use case для обновления профиля пользователя.
+ */
 class UpdateProfileUseCase @Inject constructor(
     private val repository: ProfileRepository
 ) {

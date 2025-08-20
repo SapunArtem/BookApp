@@ -8,10 +8,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * Реализация репозитория книг.
+ * Работает с удалённым источником данных и преобразует DTO в доменную модель.
+ *
+ * @param remoteDataSources источник данных (API).
+ */
 class BooksRepositoryImpl @Inject constructor(
     private val remoteDataSources: BooksRemoteDataSources
 ) : BookRepository {
 
+    /**
+     * Получение списка книг по запросу.
+     *
+     * @param query строка поиска.
+     * @return результат: список книг или ошибка.
+     */
     override suspend fun getBooks(query: String): Result<List<Book>> {
         return withContext(Dispatchers.IO) {
             try {
@@ -23,6 +35,12 @@ class BooksRepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * Получение деталей книги.
+     *
+     * @param id идентификатор книги.
+     * @return результат: книга или ошибка.
+     */
     override suspend fun getBookDetails(id: String): Result<Book> {
         return withContext(Dispatchers.IO) {
             try {

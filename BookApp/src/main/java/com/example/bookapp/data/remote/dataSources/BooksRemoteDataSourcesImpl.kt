@@ -5,6 +5,11 @@ import com.example.bookapp.data.remote.models.BookDto
 import com.example.bookapp.data.remote.models.BooksResponseDto
 import javax.inject.Inject
 
+/**
+ * Реализация удалённого источника данных для работы с API книг.
+ *
+ * @param api сервис для работы с Google Books API.
+ */
 class BooksRemoteDataSourcesImpl @Inject constructor(
     private val api: BooksServiceApi
 ) : BooksRemoteDataSources {

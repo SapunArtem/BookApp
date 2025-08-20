@@ -1,5 +1,8 @@
 package com.example.bookapp.data.remote.models
 
+/**
+ * DTO с полной информацией о книге.
+ */
 data class BookDto(
     val kind: String?,
     val id: String,

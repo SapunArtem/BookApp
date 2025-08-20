@@ -21,6 +21,11 @@ import com.example.bookapp.presentation.navigation.BooksAppNavigation
 import com.example.bookapp.presentation.navigation.Screens
 import com.example.bookapp.presentation.viewModel.SettingsViewModel
 
+/**
+ * Основная Composable-функция приложения.
+ * Создает NavController, получает текущий контекст и настройки из SettingsViewModel.
+ * Реагирует на изменения темы и языка и запускает MainAppContent.
+ */
 @Composable
 fun App() {
 
@@ -31,10 +36,12 @@ fun App() {
     val isDarkTheme by viewModel.isDarkTheme.collectAsState()
 
 
+    // Обновление контекста для локализации при старте
     LaunchedEffect(context) {
         viewModel.updateContext(context)
     }
 
+    // Перестройка UI при изменении языка или темы
     key(currentLanguage, isDarkTheme) {
         MainAppContent(
             navController = navController,
@@ -45,7 +52,12 @@ fun App() {
 
 }
 
-
+/**
+ * Главный контент приложения с Scaffold.
+ * Scaffold включает TopBar, BottomBar и навигацию между экранами.
+ *
+ * @param navController NavController для управления навигацией между экранами.
+ */
 @SuppressLint("SuspiciousIndentation")
 @Composable
 fun MainAppContent(

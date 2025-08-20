@@ -3,6 +3,9 @@ package com.example.bookapp.data.mapper
 import com.example.bookapp.data.remote.models.BookDto
 import com.example.bookapp.domain.models.Book
 
+/**
+ * Маппинг DTO книги в доменную модель.
+ */
 fun BookDto.toDomain(): Book {
     val info = this.volumeInfo
     val sale = this.saleInfo

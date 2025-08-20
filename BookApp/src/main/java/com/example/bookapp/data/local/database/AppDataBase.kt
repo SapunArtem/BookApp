@@ -11,6 +11,10 @@ import com.example.bookapp.data.local.dao.ProfileDao
 import com.example.bookapp.data.local.entity.FavoriteEntity
 import com.example.bookapp.data.local.entity.ProfileEntity
 
+/**
+ * Главная база данных приложения.
+ * Содержит таблицы: избранное (favorites) и профиль (profile).
+ */
 @Database(
     entities = [FavoriteEntity::class, ProfileEntity::class],
     version = 2,
@@ -26,6 +30,9 @@ abstract class AppDataBase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDataBase? = null
 
+        /**
+         * Получение единственного экземпляра базы данных (Singleton).
+         */
         fun getInstance(context: Context): AppDataBase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(

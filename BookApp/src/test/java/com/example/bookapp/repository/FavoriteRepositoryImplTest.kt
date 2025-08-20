@@ -19,6 +19,14 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * Тесты для [FavoriteRepositoryImpl].
+ *
+ * Проверяется:
+ * - получение списка избранных книг из базы;
+ * - добавление книги в избранное;
+ * - проверка, является ли книга избранной.
+ */
 class FavoriteRepositoryImplTest : BaseTest() {
     private lateinit var repository: FavoriteRepositoryImpl
     private lateinit var dao: FavoriteDao
@@ -31,6 +39,10 @@ class FavoriteRepositoryImplTest : BaseTest() {
         repository = FavoriteRepositoryImpl(dao, mapper)
     }
 
+    /**
+     * Тест проверяет, что метод [FavoriteRepositoryImpl.getAllFavorites]
+     * возвращает корректно замапленные книги.
+     */
     @Test
     fun `getAllFavorites should return mapped books`() = runTest {
 
@@ -67,6 +79,10 @@ class FavoriteRepositoryImplTest : BaseTest() {
         assertThat(result).containsExactly(book)
     }
 
+    /**
+     * Тест проверяет, что метод [FavoriteRepositoryImpl.addFavorite]
+     * вызывает [FavoriteDao.insert] с замапленной сущностью.
+     */
     @Test
     fun `addFavorite should call dao insert with mapped entity`() = runTest {
 
@@ -102,6 +118,10 @@ class FavoriteRepositoryImplTest : BaseTest() {
         coVerify { dao.insert(entity) }
     }
 
+    /**
+     * Тест проверяет, что метод [FavoriteRepositoryImpl.isFavorite]
+     * возвращает корректный flow из DAO.
+     */
     @Test
     fun `isFavorite should return flow from dao`() = runTest {
 

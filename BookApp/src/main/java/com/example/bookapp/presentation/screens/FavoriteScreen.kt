@@ -23,6 +23,12 @@ import com.example.bookapp.presentation.navigation.Screens
 import com.example.bookapp.presentation.viewModel.FavoriteUiState
 import com.example.bookapp.presentation.viewModel.FavoriteViewModel
 
+/**
+ * Экран с избранными книгами.
+ *
+ * @param navController NavController для навигации на экран деталей книги.
+ * @param viewModel ViewModel для работы с избранными книгами.
+ */
 @Composable
 fun FavoriteScreen(
     navController: NavController,

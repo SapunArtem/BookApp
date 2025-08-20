@@ -16,6 +16,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel для работы с избранными книгами.
+ * Управляет списком избранного и обновляет его при добавлении/удалении.
+ */
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
     private val getFavoriteUseCase: GetFavoriteUseCase,
@@ -23,6 +27,7 @@ class FavoriteViewModel @Inject constructor(
     private val removeFavoriteUseCase: RemoveFavoriteUseCase
 ) : ViewModel() {
 
+    /** Состояние UI избранных книг */
     private val _uiState = MutableStateFlow<FavoriteUiState>(FavoriteUiState.Loading)
     val uiState: StateFlow<FavoriteUiState> = _uiState
 
@@ -31,6 +36,7 @@ class FavoriteViewModel @Inject constructor(
     }
 
 
+    /** Загружает список избранных книг */
     fun loadFavorites() {
         viewModelScope.launch {
             getFavoriteUseCase()
@@ -48,6 +54,11 @@ class FavoriteViewModel @Inject constructor(
     }
 
 
+    /**
+     * Переключает статус избранного для книги
+     * @param book - объект книги
+     * @param isFavorite - текущее состояние избранного
+     */
     fun toggleFavorite(book: Book, isFavorite: Boolean) {
         viewModelScope.launch {
             try {
@@ -62,12 +73,17 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Возвращает поток, отслеживающий, является ли книга избранной
+     * @param bookId - ID книги
+     */
     fun isFavoriteFlow(bookId: String): Flow<Boolean> {
         return getFavoriteUseCase()
             .map { favorites -> favorites.any { it.id == bookId } }
     }
 }
 
+/** Состояния экрана избранного */
 sealed class FavoriteUiState {
     object Loading : FavoriteUiState()
     object Empty : FavoriteUiState()

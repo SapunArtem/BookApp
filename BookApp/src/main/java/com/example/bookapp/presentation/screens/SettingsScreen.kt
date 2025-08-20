@@ -15,6 +15,13 @@ import com.example.bookapp.presentation.components.settings.language.LanguageSet
 import com.example.bookapp.presentation.components.settings.theme.ThemeSettingsSection
 import com.example.bookapp.presentation.viewModel.SettingsViewModel
 
+/**
+ * Экран настроек приложения.
+ *
+ * Позволяет пользователю менять тему и язык приложения.
+ *
+ * @param viewModel ViewModel для работы с настройками.
+ */
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
     val currentLanguage by viewModel.currentLanguage.collectAsState()
@@ -27,6 +34,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
+            // Раздел выбора темы
             ThemeSettingsSection(
                 items = SettingsData.theme,
                 isDarkTheme = isDarkTheme,
@@ -34,6 +42,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
             )
         }
         item {
+            // Раздел выбора языка
             LanguageSettingSection(
                 items = SettingsData.language,
                 currentLanguage = currentLanguage,

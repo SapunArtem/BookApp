@@ -18,7 +18,14 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
-
+/**
+ * Тесты для [GetFavoriteUseCase], [ToggleFavoriteUseCase] и [RemoveFavoriteUseCase].
+ *
+ * Проверяется:
+ * - получение избранных книг;
+ * - добавление книги в избранное;
+ * - удаление книги из избранного.
+ */
 class FavoriteUseCasesTest : BaseTest() {
     private lateinit var getFavoriteUseCase: GetFavoriteUseCase
     private lateinit var toggleFavoriteUseCase: ToggleFavoriteUseCase
@@ -33,6 +40,9 @@ class FavoriteUseCasesTest : BaseTest() {
         removeFavoriteUseCase = RemoveFavoriteUseCase(repository)
     }
 
+    /**
+     * Тест проверяет, что [GetFavoriteUseCase] возвращает список книг из репозитория.
+     */
     @Test
     fun `GetFavoriteUseCase should return favorites from repository`() = runTest {
         val books = listOf(
@@ -50,6 +60,10 @@ class FavoriteUseCasesTest : BaseTest() {
         assertThat(result).isEqualTo(books)
     }
 
+    /**
+     * Тест проверяет, что [ToggleFavoriteUseCase] вызывает
+     * [FavoriteRepository.addFavorite] для добавления книги в избранное.
+     */
     @Test
     fun `ToggleFavoriteUseCase should call repository addFavorite`() = runTest {
         val book = Book(
@@ -66,6 +80,10 @@ class FavoriteUseCasesTest : BaseTest() {
         coVerify { repository.addFavorite(book) }
     }
 
+    /**
+     * Тест проверяет, что [RemoveFavoriteUseCase] вызывает
+     * [FavoriteRepository.removeFavorite] для удаления книги из избранного.
+     */
     @Test
     fun `RemoveFavoriteUseCase should call repository removeFavorite`() = runTest {
         val book = Book(

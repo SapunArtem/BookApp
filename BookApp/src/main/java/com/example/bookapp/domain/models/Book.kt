@@ -1,5 +1,23 @@
 package com.example.bookapp.domain.models
 
+/**
+ * Модель данных книги.
+ *
+ * @property id уникальный идентификатор книги
+ * @property title название книги
+ * @property authors список авторов книги
+ * @property publisher издатель (опционально)
+ * @property publishedDate дата публикации (опционально)
+ * @property description описание книги (опционально)
+ * @property pageCount количество страниц (опционально)
+ * @property categories категории книги
+ * @property thumbnail ссылка на изображение обложки (опционально)
+ * @property language язык книги (опционально)
+ * @property previewLink ссылка на превью книги (опционально)
+ * @property infoLink ссылка на дополнительную информацию (опционально)
+ * @property isEbook признак электронного формата книги
+ * @property saleability информация о возможности покупки (опционально)
+ */
 data class Book(
     val id: String,
     val title: String,

@@ -4,6 +4,9 @@ import com.example.bookapp.domain.models.Book
 import com.example.bookapp.domain.repository.BookRepository
 import javax.inject.Inject
 
+/**
+ * Use case для получения детальной информации о книге.
+ */
 class GetBooksDetailsUseCase @Inject constructor(
     private val repository: BookRepository
 ) {

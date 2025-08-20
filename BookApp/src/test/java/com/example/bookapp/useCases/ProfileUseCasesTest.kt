@@ -17,6 +17,13 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * Тесты для [GetProfileUseCase] и [UpdateProfileUseCase].
+ *
+ * Проверяется:
+ * - корректное получение профиля из репозитория;
+ * - обновление профиля через репозиторий.
+ */
 class ProfileUseCasesTest : BaseTest() {
     private lateinit var getProfileUseCase: GetProfileUseCase
     private lateinit var updateProfileUseCase: UpdateProfileUseCase
@@ -29,6 +36,10 @@ class ProfileUseCasesTest : BaseTest() {
         updateProfileUseCase = UpdateProfileUseCase(repository)
     }
 
+    /**
+     * Тест роверяет, что [GetProfileUseCase] возвращает профиль,
+     * полученный из [ProfileRepository].
+     */
     @Test
     fun `GetProfileUseCase should return profile from repository`() = runTest {
         val profile = Profile(
@@ -43,6 +54,10 @@ class ProfileUseCasesTest : BaseTest() {
         assertThat(result).isEqualTo(profile)
     }
 
+    /**
+     * Тест проверяет, что [UpdateProfileUseCase] вызывает метод
+     * [ProfileRepository.updateProfile] с переданным профилем.
+     */
     @Test
     fun `UpdateProfileUseCase should call repository updateProfile`() = runTest {
         val profile = Profile(

@@ -14,6 +14,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel для настроек приложения.
+ * Управляет языком и темой приложения.
+ */
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val changeLanguage: ChangeAppLanguageUseCase,
@@ -22,12 +26,15 @@ class SettingsViewModel @Inject constructor(
     private val themeRepository: ThemeRepository
 ) : ViewModel() {
 
+    /** Текущий язык приложения */
     private val _currentLanguage = MutableStateFlow(localizationRepository.getCurrentLanguage())
     val currentLanguage: StateFlow<String> = _currentLanguage
 
+    /** Состояние темы: true если темная */
     private val _isDarkTheme = MutableStateFlow(themeRepository.getCurrentTheme())
     val isDarkTheme: StateFlow<Boolean> = _isDarkTheme
 
+    /** Устанавливает язык приложения */
     fun setLanguage(languageCode: String) {
         viewModelScope.launch {
             changeLanguage(languageCode)
@@ -35,6 +42,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+    /** Обновляет контекст приложения для локализации */
     fun updateContext(newContext: Context) {
         if (localizationRepository is LocalizationRepositoryImpl) {
             localizationRepository.updateContext(newContext)
@@ -42,6 +50,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+    /** Устанавливает тему приложения */
     fun setTheme(isDark: Boolean) {
         viewModelScope.launch {
             changeTheme(isDark)

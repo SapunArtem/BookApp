@@ -13,6 +13,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 
+/**
+ * Нижняя панель навигации с тремя вкладками: Главная, Избранное, Профиль.
+ *
+ * @param navController контроллер навигации для переходов между экранами
+ * @param currentRoute текущий активный маршрут для подсветки выбранной вкладки
+ */
 @Composable
 fun BottomBar(
     navController: NavController,

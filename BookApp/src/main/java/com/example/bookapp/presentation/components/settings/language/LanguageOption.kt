@@ -20,6 +20,13 @@ import androidx.compose.ui.unit.dp
 import com.example.bookapp.R
 import com.example.bookapp.presentation.components.settings.SettingsItem
 
+/**
+ * Отображает одну языковую опцию в списке настроек.
+ *
+ * @param item Объект настроек языка.
+ * @param isSelected Флаг, показывающий выбран ли данный язык.
+ * @param onSelect Lambda-функция, вызываемая при выборе этой опции.
+ */
 @Composable
 fun LanguageOption(
     item: SettingsItem.LanguageSettings,
@@ -38,6 +45,7 @@ fun LanguageOption(
     ) {
 
 
+        // Отображение флага языка
         Image(
             painter = painterResource(id = item.flagRes),
             contentDescription = null,
@@ -46,6 +54,7 @@ fun LanguageOption(
 
         Spacer(modifier = Modifier.width(16.dp))
 
+        // Отображение названия языка
         Text(
             text = stringResource(item.titleRes),
             style = MaterialTheme.typography.bodyLarge,
@@ -54,6 +63,7 @@ fun LanguageOption(
 
         Spacer(modifier = Modifier.weight(1f))
 
+        // Отображение галочки, если язык выбран
         if (isSelected) {
             androidx.compose.material3.Icon(
                 painter = painterResource(id = R.drawable.ic_check),

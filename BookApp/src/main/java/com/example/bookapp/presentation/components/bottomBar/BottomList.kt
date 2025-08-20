@@ -7,6 +7,9 @@ import androidx.compose.material.icons.filled.Person
 import com.example.bookapp.R
 import com.example.bookapp.presentation.navigation.Screens
 
+/**
+ * Объект, содержащий список элементов нижней навигации
+ */
 object BottomList {
     val bottomItemsList = listOf(
         BottomItem(

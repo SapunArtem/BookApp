@@ -1,5 +1,8 @@
 package com.example.bookapp.data.remote.models
 
+/**
+ * DTO с метаданными о книге (название, авторы, обложка и т.д.).
+ */
 data class BookInfoDto(
     val title: String?,
     val authors: List<String>?,

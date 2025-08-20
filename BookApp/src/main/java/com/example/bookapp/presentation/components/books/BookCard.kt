@@ -21,6 +21,12 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.bookapp.domain.models.Book
 
+/**
+ * Отображает карточку книги с изображением обложки, названием и авторами.
+ *
+ * @param book объект книги [Book], содержащий все данные для отображения
+ * @param onClick лямбда, вызываемая при клике на карточку
+ */
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun BookCard(book: Book, onClick: () -> Unit) {
