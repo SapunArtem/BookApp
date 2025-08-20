@@ -21,8 +21,17 @@ jobs:
         distribution: temurin
         java-version: 11
 
+    - name: Make Gradle wrapper executable
+      run: chmod +x ./gradlew
+
     - name: Build Debug APK
       run: ./gradlew assembleDebug --no-daemon
+
+    - name: Run Unit Tests
+      run: ./gradlew testDebugUnitTest --no-daemon
+
+    - name: Run Instrumentation Tests
+      run: ./gradlew connectedDebugAndroidTest --no-daemon
 
     - name: Run Unit Tests
       run: ./gradlew testDebugUnitTest --no-daemon
