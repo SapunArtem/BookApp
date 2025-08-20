@@ -20,9 +20,13 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
 
         buildConfigField("String", "BOOKS_API_KEY", "\"${getLocalProperty("BOOKS_API_KEY")}\"")
 
+    }
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
 
     buildTypes {
@@ -67,6 +71,7 @@ dependencies {
     testImplementation(libs.androidx.core.testing)
     testImplementation(libs.truth)
     testImplementation(libs.robolectric)
+    androidTestUtil ("androidx.test:orchestrator:1.4.2")
 
     //DataStore
     implementation(libs.androidx.datastore.preferences.core)
