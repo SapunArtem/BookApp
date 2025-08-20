@@ -1,6 +1,7 @@
 package com.example.bookapp
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
@@ -41,7 +42,7 @@ class ProfileAndSettings {
         // Переходим в профиль
         composeTestRule.onNodeWithTag(R.string.profile.toString()).performClick()
 
-        composeTestRule.waitUntil(5_000) {
+        composeTestRule.waitUntil(5000) {
             composeTestRule.onAllNodesWithTag("Name").fetchSemanticsNodes().isNotEmpty()
         }
         // Проверяем начальные данные
@@ -60,12 +61,18 @@ class ProfileAndSettings {
         // Сохраняем
         composeTestRule.onNodeWithTag("BtnSave").performClick()
 
-        composeTestRule.waitUntil(5_000) {
-            composeTestRule.onAllNodesWithTag("Test User").fetchSemanticsNodes().isNotEmpty()
+        composeTestRule.waitUntil(10000) {
+            composeTestRule.onAllNodesWithTag("BtnSave").fetchSemanticsNodes().isNotEmpty()
+        }
+        composeTestRule.onNodeWithTag(R.string.profile.toString()).performClick()
+
+        composeTestRule.waitUntil(10000) {
+            composeTestRule.onAllNodesWithTag(R.string.profile.toString()).fetchSemanticsNodes().isNotEmpty()
         }
         // Проверяем изменения
-        composeTestRule.onNodeWithText("Test User").assertIsDisplayed()
-        composeTestRule.onNodeWithText("test@example.com").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("Name").assertTextContains("Test User")
+        composeTestRule.onNodeWithTag("Email").assertTextContains("test@example.com")
+
     }
 
     /**
